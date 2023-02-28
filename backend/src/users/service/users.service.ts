@@ -2,7 +2,7 @@ import { UsersModule } from './../users.module';
 import { CreateUserDto } from '../dtos/CreateUser.dto';
 import { User, UserDocument } from '../Schema/users.schema';
 import { Model } from 'mongoose';
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { hashPassword } from '../utiles/bcrypt';
@@ -17,11 +17,11 @@ export class UsersService {
 
         const userExist = await this.UserModule.findOne({ email: userData.email }).exec();
         if(userExist) {
-            throw new BadRequestException('User already exist!');
+            throw new HttpException('User already exist!', HttpStatus.BAD_REQUEST);
         }
         const user = await newUser.save();
         if(!user) {
-            throw new BadRequestException('User not created!');
+            throw new HttpException('User not created!', HttpStatus.BAD_REQUEST);
         }
         return user;
     }
@@ -29,12 +29,17 @@ export class UsersService {
     async GetAllUser() {
         const UserData = await this.UserModule.find().exec();
         if(!UserData || UserData.length == 0) {
-            throw new NotFoundException('Users data not found!');
+            throw new HttpException('User not found!', HttpStatus.BAD_REQUEST);
         }
         return UserData;
     }
 
-    async LoginUser(userData: CreateUserDto) {
-        
+    async GetUserById(id: number) {
+        const UserId = await this.UserModule.findById(id).exec();
+
+        if(!UserId) {
+            throw new HttpException('User not found!', HttpStatus.BAD_REQUEST);
+        }
+        return UserId;
     }
 }

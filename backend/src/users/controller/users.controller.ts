@@ -6,24 +6,26 @@ import { Request, Response, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ValidateUserPipe } from '../pipes/validate-user/validate-user.pipe';
 
 @Controller('users')
+@UseGuards(AuthGuard)
+@UsePipes(new ValidationPipe())
+
 export class UsersController {
     constructor(private userService: UsersService) {}
-    @UsePipes(new ValidationPipe())
-    @UseGuards(AuthGuard)
 
-    @Get()
+    @Get('getAll')
     GetAllUser() {
         return this.userService.GetAllUser();
     }
 
     @Post('create')
-    CreateUser(@Body()  userData: CreateUserDto) {
+    CreateUser(@Body(ValidateUserPipe)  userData: CreateUserDto) {
         const user = this.userService.CreateUser(userData);
         return user;
     }
 
-    @Post('login')
-    LoginUser(@Body() userData: CreateUserDto) {
-        return this.userService.LoginUser(userData);
+    @Get(':id')
+    GetUserById(@Param('id') id: any) {
+        const UserId = this.userService.GetUserById(id);
+        return UserId;
     }
 } 
