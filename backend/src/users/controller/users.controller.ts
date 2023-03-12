@@ -17,11 +17,13 @@ export class UsersController {
         return this.userService.GetAllUser();
     }
 
-    @Post('create')
-    CreateUser(@Body(ValidateUserPipe)  userData: CreateUserDto) {
-        const user = this.userService.CreateUser(userData);
-        return user;
-    }
+    // @Post('login')
+    // LoginUser(@Body() email, password ) {
+    //     console.log(email, password);
+    //     const user = this.userService.LoginUser(email, password);
+    //     return user;
+        
+    // }
 
     @Get(':id')
     GetUserById(@Param('id') id: any) {
