@@ -1,12 +1,12 @@
-import { AuthGuard } from './../guard/auth/auth.guard';
 import { UsersService } from '../service/users.service';
 import { CreateUserDto } from '../dtos/CreateUser.dto';
 import { Controller, Get, Post, Body, Req, Res, Param, ParseIntPipe, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Request, Response, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ValidateUserPipe } from '../pipes/validate-user/validate-user.pipe';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Controller('users')
-@UseGuards(AuthGuard)
+@UseGuards(JwtAuthGuard)
 @UsePipes(new ValidationPipe())
 
 export class UsersController {
@@ -16,14 +16,6 @@ export class UsersController {
     GetAllUser() {
         return this.userService.GetAllUser();
     }
-
-    // @Post('login')
-    // LoginUser(@Body() email, password ) {
-    //     console.log(email, password);
-    //     const user = this.userService.LoginUser(email, password);
-    //     return user;
-        
-    // }
 
     @Get(':id')
     GetUserById(@Param('id') id: any) {

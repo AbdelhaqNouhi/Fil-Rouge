@@ -38,7 +38,7 @@ export class AuthService {
             firstName: user.firstName, 
             lastName: user.lastName
         });
-        
+
         const LogUser = {
             token,
             email: user.email,
@@ -66,6 +66,8 @@ export class AuthService {
         const LogUser = {
             token,
             email: user.email,
+            first_name: user.firstName,
+            last_name: user.lastName,
         }
         return LogUser;
     }
