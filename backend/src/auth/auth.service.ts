@@ -8,11 +8,15 @@ import { User, UserDocument } from 'src/users/Schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import {JwtService} from '@nestjs/jwt';
 
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectModel(User.name) private UserModule: Model<UserDocument>) {}
+    constructor(@InjectModel(User.name) 
+        private UserModule: Model<UserDocument>, 
+        private jwtService: JwtService
+    ) {}
 
 
     async CreateUser(userData: CreateUserDto) {
@@ -27,7 +31,14 @@ export class AuthService {
         if (!user) {
             throw new HttpException('User not created!', HttpStatus.BAD_REQUEST);
         }
-        return user;
+
+        const token = this.jwtService.sign({id: user._id});
+        const LogUser = {
+            token,
+            email: user.email,
+        }
+
+        return LogUser;
     }
 
 
@@ -45,6 +56,11 @@ export class AuthService {
             throw new HttpException('invalid email or password', HttpStatus.BAD_REQUEST);
         }
 
-        return user;
+        const token = this.jwtService.sign({id: user._id});
+        const LogUser = {
+            token,
+            email: user.email,
+        }
+        return LogUser;
     }
 }
