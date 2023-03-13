@@ -32,7 +32,13 @@ export class AuthService {
             throw new HttpException('User not created!', HttpStatus.BAD_REQUEST);
         }
 
-        const token = this.jwtService.sign({id: user._id});
+        const token = this.jwtService.sign({
+            id: user._id, 
+            email: user.email, 
+            firstName: user.firstName, 
+            lastName: user.lastName
+        });
+        
         const LogUser = {
             token,
             email: user.email,
