@@ -3,7 +3,7 @@ import { CreateUserDto } from '../dtos/CreateUser.dto';
 import { Controller, Get, Post, Body, Req, Res, Param, ParseIntPipe, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Request, Response, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ValidateUserPipe } from '../pipes/validate-user/validate-user.pipe';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard)

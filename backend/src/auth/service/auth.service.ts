@@ -1,7 +1,7 @@
-import { AuthDto } from './../users/dtos/Auth.dto';
-import { UsersService } from './../users/service/users.service';
-import { CreateUserDto } from './../users/dtos/CreateUser.dto';
-import { hashPassword } from '../users/utiles/bcrypt';
+import { AuthDto } from '../../users/dtos/Auth.dto';
+import { UsersService } from '../../users/service/users.service';
+import { CreateUserDto } from '../../users/dtos/CreateUser.dto';
+import { hashPassword } from '../../users/utiles/bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersModule } from 'src/users/users.module';
 import { User, UserDocument } from 'src/users/Schema/users.schema';
