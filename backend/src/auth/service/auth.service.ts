@@ -1,10 +1,8 @@
-import { AuthDto } from '../../users/dtos/Auth.dto';
-import { UsersService } from '../../users/service/users.service';
-import { CreateUserDto } from '../../users/dtos/CreateUser.dto';
-import { hashPassword } from '../../users/utiles/bcrypt';
+import { AuthDto } from '../dtos/Auth.dto';
+import { CreateUserDto } from '../dtos/CreateUser.dto';
+import { hashPassword } from '../utiles/bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UsersModule } from 'src/users/users.module';
-import { User, UserDocument } from 'src/users/Schema/users.schema';
+import { User, UserDocument } from 'src/Schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
@@ -62,7 +60,7 @@ export class AuthService {
             throw new HttpException('invalid email or password', HttpStatus.BAD_REQUEST);
         }
 
-        const token = this.jwtService.sign({id: user._id});
+        const token = this.jwtService.sign({id: user._id, fiest_name: user.firstName, last_name: user.lastName});
         const LogUser = {
             token,
             email: user.email,
