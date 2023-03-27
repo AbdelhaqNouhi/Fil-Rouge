@@ -1,0 +1,29 @@
+import React from 'react'
+import Product1 from '../../assets/images/product/product1.png'
+import shopping from '../../assets/images//product/shopping.svg'
+
+const Product = () => {
+    return (
+        <div className='md:my-10 my-16 mx-6 md:mx-16'>
+            <div className='w-1/4 flex flex-col gap-4'>
+                <div className='flex w-full relative'>
+                    <img className='w-full' src={Product1} alt="" />
+                    <div className='absolute w-full flex justify-end'>
+                        <span className='bg-[#4E4A42] text-white px-6 py-1 rounded'>New</span>
+                    </div>
+                </div>
+                <div className='bg-[#B8C89D] text-white rounded px-4 py-2 flex justify-between '>
+                    <div className='py-1 flex flex-col gap-2'>
+                        <h1>hhhhhhhhh</h1>
+                        <p>hhhhhhhhhhhh</p>
+                    </div>
+                    <div className='mb-auto'>
+                        <img className='h-8' src={shopping} alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Product

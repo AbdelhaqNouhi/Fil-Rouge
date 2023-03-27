@@ -4,7 +4,7 @@
 }
 
 :root {
-  --v-red: #ff4655;
+  --v-primary: #D4C7A0;
   --v-white: #ece8e1;
   --v-black: #0f1923;
   --v-outline: rgba(236, 232, 225, 0.5);
@@ -114,7 +114,7 @@ button::after {
   top: 0;
   left: -5%;
   z-index: 1;
-  background-color: var(--v-red);
+  background-color: var(--v-primary);
   transform: translateX(-100%) skew(-10deg);
   transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
@@ -154,5 +154,6 @@ button:hover .label-text:after {
 }
 
 .primary .label::before {
-  background-color: var(--v-white);
+  border: 1px solid #000000;
+  /* background-color: var(--v-white); */
 }
