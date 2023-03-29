@@ -12,7 +12,7 @@ const Home = () => {
     const [title, setTitle] = useState('OPEN MY ACCOUNT');
     
     return (
-        <div>
+        <div className="flex flex-col md:gap-8">
             <div className="w-full">
                 <div className="absolute flex flex-col md:gap-10 gap-8 justify-center md:my-28 my-16 mx-6 md:mx-16 md:text-4xl md:text-1xl font-bold">
                     <Typewriter

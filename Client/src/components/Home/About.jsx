@@ -4,11 +4,11 @@ import img from '../../assets/images/aboutus.jpg'
 const About = () => {
     return (
         <div className="md:my-10 my-16 mx-6 md:mx-16">
-            <div class="bg-[#D4C7A0] bg-opacity-20 rounded flex justify-between gap-16 px-4 py-4">
-                <div class="w-1/2 h-full">
+            <div class="bg-[#D4C7A0] bg-opacity-20 rounded flex md:justify-between max-md:flex-col gap-12 px-4 py-4">
+                <div class="w-1/2 h-full max-md:w-full">
                     <img className=' rounded' src={img} alt="" />
                 </div>
-                <div class="flex flex-col gap-12 items-center w-1/2 py-2">
+                <div class="flex flex-col gap-12 items-center w-1/2 py-2 max-md:w-full max-md:gap-6">
                     <div class="flex flex-col gap-4 items-center text-[#D4C7A0]">
                         <p>À PROPOS</p>
                         <p>MAISON DATTY</p>

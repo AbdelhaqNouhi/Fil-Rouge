@@ -7,11 +7,11 @@ import Coursier from "../../assets/images/service/Livraison-par-coursier.svg";
 
 function Services() {
     return (
-        <div className="md:my-10 my-16 mx-6 md:mx-16 flex flex-col gap-10">
+        <div className="md:my-10 mx-6 md:mx-16 flex flex-col gap-10">
             <div className="flex justify-center text-xl font-bold">
                 <h1 className="border-b-2 border-black">Our Services</h1>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between max-md:flex-col gap-20">
                 <div className="flex flex-col gap-4 items-center">
                     <div>
                         <img src={Paiement} alt="" />

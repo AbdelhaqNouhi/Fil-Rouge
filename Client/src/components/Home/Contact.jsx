@@ -4,8 +4,8 @@ import React from 'react'
 const Contact = () => {
     return (
         <div className=' md:my-10 my-16 mx-6 md:mx-16'>
-            <div className='bg-[#D4C7A0] bg-opacity-20 rounded p-8 flex justify-between'>
-                <div className='flex flex-col gap-16'>
+            <div className='bg-[#D4C7A0] bg-opacity-20 rounded p-8 flex justify-between max-md:flex-col gap-10'>
+                <div className='flex flex-col gap-16 max-md:gap-8'>
                     <h2 className='text-[#D4C7A0] font-medium text-2xl'>Contact Us</h2>
                     <div className='flex flex-col gap-10'>
                         <div className='w-full flex gap-4 py-1 rounded items-center'>
@@ -29,7 +29,7 @@ const Contact = () => {
                             <p>Monday - Saturday: 09:00 am - 18:00 pm</p>
                         </div>
                     </div>
-                    <div class="flex gap-12">
+                    <div class="flex gap-16">
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14.2236 0.00756836H4.7613C2.13957 0.00756836 0 2.14714 0 4.76887V14.2463C0 16.8529 2.13957 18.9925 4.7613 18.9925H14.2387C16.8604 18.9925 19 16.8529 19 14.2312V4.76887C18.9849 2.14714 16.8454 0.00756836 14.2236 0.00756836ZM14.2086 7.11938C14.2086 7.22485 14.2086 7.33032 14.2086 7.4358C14.2086 10.6 11.7676 14.2463 7.29263 14.2463C5.92149 14.2463 4.64076 13.8545 3.57098 13.1765C3.76685 13.1915 3.94766 13.2066 4.14354 13.2066C5.28866 13.2066 6.32831 12.8299 7.15702 12.182C6.08723 12.167 5.19826 11.4739 4.88184 10.5246C5.03251 10.5547 5.18319 10.5698 5.33386 10.5698C5.55987 10.5698 5.78588 10.5397 5.98176 10.4794C4.89691 10.2534 4.0682 9.28909 4.0682 8.1289V8.09876C4.36955 8.27957 4.7613 8.38504 5.15305 8.40011C4.50516 7.97822 4.0682 7.23992 4.0682 6.41121C4.0682 5.97426 4.18874 5.56744 4.39968 5.20582C5.60508 6.65229 7.38303 7.60154 9.40206 7.70701C9.35686 7.5262 9.34179 7.34539 9.34179 7.16458C9.34179 5.83865 10.4266 4.76887 11.7676 4.76887C12.4607 4.76887 13.0936 5.05515 13.5456 5.52224C14.1031 5.41677 14.6154 5.22089 15.0825 4.93461C14.9017 5.4921 14.5099 5.95919 14.0127 6.26054C14.5099 6.20027 14.977 6.07973 15.414 5.88385C15.0825 6.36601 14.6757 6.7879 14.2086 7.11938Z" fill="black" />
                         </svg>
@@ -42,22 +42,22 @@ const Contact = () => {
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-8 w-1/2">
-                    <h5>LAny question or remarks? Just  fill up the form</h5>
-                    <div class="flex flex-col gap-8">
-                        <div class="flex gap-8 ">
-                            <input className='p-2 w-1/2 rounded' type="text" name="nom" placeholder="Nom" />
-                            <input className='p-2 w-1/2 rounded' type="text" name="prenome" placeholder="Prenome" />
+                <div class="flex flex-col gap-8 w-1/2 max-md:w-full">
+                    <h5 className='text-[#D4C7A0] font-medium'>If Any question or remarks? Just  fill up the form..!</h5>
+                    <div class="flex flex-col gap-8 max-md:gap-4">
+                        <div class="flex gap-8 max-md:gap-4 w-full max-md:flex-col">
+                            <input className='p-2 w-full rounded' type="text" name="nom" placeholder="Nom" />
+                            <input className='p-2 w-full rounded' type="text" name="prenome" placeholder="Prenome" />
                         </div>
-                        <div class="flex gap-8">
-                            <input className='p-2 w-1/2 rounded' type="email" name="email" placeholder="E-mail" />
-                            <input className='p-2 w-1/2 rounded' type="tel" name="phone" placeholder="Phone" />
+                        <div class="flex gap-8 max-md:gap-4 w-full max-md:flex-col">
+                            <input className='p-2 w-full rounded' type="email" name="email" placeholder="E-mail" />
+                            <input className='p-2 w-full rounded' type="tel" name="phone" placeholder="Phone" />
                         </div>
                     </div>
                     <div className=''>
                         <textarea className='w-full p-2 max-h-24 rounded' name="message" placeholder="Message"></textarea>
                     </div>
-                    <button className='bg-[#4E4A42] text-white py-2'>Send Message</button>
+                    <button className='bg-[#4E4A42] text-white py-2 rounded-md'>Send Message</button>
                 </div>
             </div>
         </div>
