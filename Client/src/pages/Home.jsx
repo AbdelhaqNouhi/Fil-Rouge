@@ -4,6 +4,9 @@ import PrimaryButton from "../layouts/Button/PrimaryButton";
 import  Background from '../assets/images/Background.svg'
 import { useState } from "react";
 import Product from "../components/Home/Product";
+import Service from "../components/Home/Service";
+import About from "../components/Home/About";
+import Contact from "../components/Home/Contact";
 
 const Home = () => {
     const [title, setTitle] = useState('OPEN MY ACCOUNT');
@@ -44,6 +47,9 @@ const Home = () => {
                 </div>
             </div>
             <Product />
+            <Service />
+            <About />
+            <Contact />
         </div>
     );
 };
