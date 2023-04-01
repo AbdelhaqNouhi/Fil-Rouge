@@ -11,7 +11,7 @@ import ErrorPage from './pages/ErrorPage'
 function App() {
 
   return (
-    <div className="App">
+    <div className="App font-body">
       <Router>
         <NavBar />
 

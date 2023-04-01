@@ -6,7 +6,7 @@ const Product = () => {
     return (
         <div>
             <div className='md:my-10 my-16 mx-6 md:mx-16 flex justify-evenly max-md:flex-col gap-12'>
-                <div className='md:w-1/4 w-full flex flex-col gap-4'>
+                <div className='md:w-1/4 w-full flex flex-col gap-4 transform transition-all hover:scale-105'>
                     <div className='flex w-full relative'>
                         <img className='w-full' src={Product1} alt="" />
                         <div className='absolute w-full flex justify-end'>
@@ -23,7 +23,7 @@ const Product = () => {
                         </div>
                     </div>
                 </div>
-                <div className='md:w-1/4 w-full flex flex-col gap-4'>
+                <div className='md:w-1/4 w-full flex flex-col gap-4 transform transition-all hover:scale-105'>
                     <div className='flex w-full relative'>
                         <img className='w-full' src={Product1} alt="" />
                         <div className='absolute w-full flex justify-end'>
@@ -40,7 +40,7 @@ const Product = () => {
                         </div>
                     </div>
                 </div>
-                <div className='md:w-1/4 w-full flex flex-col gap-4'>
+                <div className='md:w-1/4 w-full flex flex-col gap-4 transform transition-all hover:scale-105'>
                     <div className='flex w-full relative'>
                         <img className='w-full' src={Product1} alt="" />
                         <div className='absolute w-full flex justify-end'>
