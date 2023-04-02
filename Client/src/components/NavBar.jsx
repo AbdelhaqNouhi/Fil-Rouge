@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from "react-router-dom"; 
 import logo from '../assets/images/logo.png'
+import CustomButton from './custom/button/CustomButton';
 
 function NavBar() {
 
@@ -35,8 +36,8 @@ function NavBar() {
     };
     
     return (
-        <nav className= "text-[#ffff] bg-quaternary sticky top-0 z-[100] border-gray-200 px-2 sm:px-16 py-2.5  bg-[#4E4A42]">
-            <div className="container flex flex-wrap items-center justify-between mx-auto">
+        <nav className= "text-white bg-quaternary sticky top-0 z-[100] border-gray-200 px-2 sm:px-16 py-2.5  bg-primary">
+            <div className="container flex flex-wrap gap-10 items-center justify-between mx-auto">
                 <NavLink to="/" className="flex items-center w-40">
                     <img src={logo} alt="logo" />
                 </NavLink>
@@ -44,13 +45,13 @@ function NavBar() {
                     <button
                         onClick={() => active()}
                         type="button"
-                        className="inline-flex focus:ring-gray-200 dark:text-[#D4C7A0]"
+                        className="inline-flex focus:ring-gray-200"
                         aria-controls="navbar-default"
                         aria-expanded="false"
                     >
                         <span className="sr-only">Open main menu</span>
                         <svg
-                            className="w-7 h-7"
+                            className="w-8 h-8 rounded-full p-1"
                             aria-hidden="true"
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -73,21 +74,21 @@ function NavBar() {
                     }
                     id="navbar-default"
                 >
-                    <ul className="flex flex-col justify-center items-center text-white-200 p-2 mt-4 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-[#4E4A42] md:dark:bg-[#4E4A42]">
-                        <li className='md:flex gap-16'>
+                    <ul className="flex justify-center items-center text-white-200 p-2 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-primary md:dark:bg-primary">
+                        <li className='flex gap-20 max-md:flex-col max-md:gap-12 items-center'>
                             <NavLink 
-                                to={"/"} 
-                                className={({ isActive }) => (isActive ? 'block py-2 pl-3 pr-4 text-white md:bg-transparent md:text-blue- hover:text-primary md:p-0 dark:text-white border-b-2' : 'block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:border-0 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:text-white md:dark:hover:bg-transparent')} >
+                                to={"/"}
+                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
                                 Home 
                             </NavLink>
                             <NavLink
                                 to={"/Store"}
-                                className={({ isActive }) => (isActive ? 'block py-2 pl-3 pr-4 text-white md:bg-transparent md:text-blue- hover:text-primary md:p-0 dark:text-white border-b-2' : 'block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:border-0 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent')} >
+                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
                                 Store
                             </NavLink>  
                             <NavLink
                                 to={"/ContactUs"}
-                                className={({ isActive }) => (isActive ? 'block py-2 pl-3 pr-4 text-white md:bg-transparent md:text-blue- hover:text-primary md:p-0 dark:text-white border-b-2' : 'block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:border-0 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent')} >
+                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
                                 ContactUs
                             </NavLink>
                         </li>
@@ -111,18 +112,17 @@ function NavBar() {
                                         {lastName}
                                     </NavLink>
                                 </li>
-                                <li onClick={() => logOut()}>
-                                    <div className="block py-3 px-4 cursor-pointer hover:scale-105 duration-300 bg-blue-500 text-white rounded-md">
-                                        Log Out
-                                    </div>
+                                <li>
+                                    <CustomButton onClick={() => logOut()} text="Log Out" />
                                 </li>
                             </>
                         ) : (
-                            <li onClick={() => Auth_modal()}>
+                            <li>
                                 <NavLink
+                                        className="flex justify-center max-md:mb-6"
                                     to={"/signIn"}
-                                    className="block py-3 px-4 cursor-pointer hover:scale-105 duration-300 bg-[#D4C7A0] text-white rounded-md text-center">
-                                    sign in
+                                >
+                                        <CustomButton onClick={() => Auth_modal()} text="Login"/>
                                 </NavLink>
                             </li>
                         )}

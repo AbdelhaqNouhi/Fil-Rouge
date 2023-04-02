@@ -9,7 +9,7 @@ const About = () => {
                     <img className='rounded' src={img} alt="" />
                 </div>
                 <div class="flex flex-col gap-12 items-center w-1/2 py-2 max-md:w-full max-md:gap-6">
-                    <div class="flex flex-col gap-4 items-center text-[#D4C7A0]">
+                    <div class="flex flex-col gap-4 items-center">
                         <p>À PROPOS</p>
                         <p>MAISON DATTY</p>
                     </div>

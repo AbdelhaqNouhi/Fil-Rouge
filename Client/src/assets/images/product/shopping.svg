@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="32px" height="32px" fill-rule="nonzero">
-<g fill="white" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+<g fill="black" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
 <g transform="scale(8,8)">
 <path d="M16,3c-2.74609,0 -5,2.25391 -5,5v1h-4.9375l-0.0625,0.9375l-1,18l-0.0625,1.0625h22.125l-0.0625,-1.0625l-1,-18l-0.0625,-0.9375h-4.9375v-1c0,-2.74609 -2.25391,-5 -5,-5zM16,5c1.65625,0 3,1.34375 3,3v1h-6v-1c0,-1.65625 1.34375,-3 3,-3zM7.9375,11h3.0625v3h2v-3h6v3h2v-3h3.0625l0.875,16h-17.875z">
 </path>

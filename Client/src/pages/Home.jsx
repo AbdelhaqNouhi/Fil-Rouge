@@ -16,9 +16,9 @@ const Home = () => {
     return (
         <div className="flex flex-col md:gap-8">
             <div className="w-ful h-screen">
-                <div className="absolute bg-black opacity-25 w-full h-full"></div>
+                <div className="absolute bg-black opacity-50 w-full h-full"></div>
                 <div className="max-sm:flex justify-center">
-                    <div className="absolute flex flex-col md:gap-8 gap-4 md:my-28 my-8 max-sm:items-center mx-6 md:mx-16 md:text-4xl text-2xl font-bold">
+                    <div className="absolute flex flex-col md:gap-9 gap-4 md:my-28 my-8 max-sm:items-center mx-6 md:mx-16 md:text-3xl text-2xl text-white">
                         <Typewriter
                             className='text-white'
                             onInit={(typewriter) => {
@@ -33,7 +33,7 @@ const Home = () => {
                         <div>
                             <div className="flex md:gap-4 gap-1 ">
                                 <h1>Becoming a</h1>
-                                <h1 className="md:text-4xl text-white">MAISON DATTY,</h1>
+                                <h1 className=" text-green">MAISON DATTY,</h1>
                             </div>
                             <h1>Customer in all simplicity.</h1>
                         </div>
@@ -43,7 +43,7 @@ const Home = () => {
                                 onClick={() => Sign_up()}
                                 width={"w-60"}
                             /> */}
-                            <CustomButton text="Shop Online" />
+                            <CustomButton text="Shop Online" className='font-medium' />
                         </div>
                         <img className="bg-cover w-1/2 max-lg:hidden" src={Background2} alt="img" />
                     </div>
