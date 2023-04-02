@@ -5,7 +5,7 @@ import CustomButton from '../custom/button/CustomButton'
 const Contact = () => {
     return (
         <div className=' md:my-10 my-16 mx-6 md:mx-16'>
-            <div className='bg-[#D4C7A0] bg-opacity-20 rounded p-8 flex justify-between max-md:flex-col gap-10'>
+            <div className='bg-secondary bg-opacity-20 rounded p-8 flex justify-between max-md:flex-col gap-10'>
                 <div className='flex flex-col gap-16 max-md:gap-8'>
                     <h2 className='font-medium text-2xl'>Contact Us</h2>
                     <div className='flex flex-col gap-10'>

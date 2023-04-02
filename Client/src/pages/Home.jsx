@@ -1,6 +1,5 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
-// import PrimaryButton from "../layouts/Button/PrimaryButton";
 import CustomButton from "../components/custom/button/CustomButton";
 import Background from '../assets/images/Background.png'
 import Background2 from '../assets/images/Background2.png'
@@ -38,11 +37,6 @@ const Home = () => {
                             <h1>Customer in all simplicity.</h1>
                         </div>
                         <div className='flex'>
-                            {/* <PrimaryButton
-                                children={"Shop Online"}
-                                onClick={() => Sign_up()}
-                                width={"w-60"}
-                            /> */}
                             <CustomButton text="Shop Online" className='font-medium' />
                         </div>
                         <img className="bg-cover w-1/2 max-lg:hidden" src={Background2} alt="img" />

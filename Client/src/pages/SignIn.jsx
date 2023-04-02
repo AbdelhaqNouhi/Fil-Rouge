@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom"; 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../components/custom/button/CustomButton";
 
 
 const SignIn = () => {
@@ -36,15 +37,15 @@ const SignIn = () => {
     return (
         <div>
             <div className="min-h-screen flex justify-center items-center">
-                <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3/1 items-center p-6">
-                    <div className="md:w-1/2 w-screen px-16">
+                <div className="bg-secondary md:w-1/3 w-full mx-6 bg-opacity-20 flex rounded-2xl shadow-lg items-center p-6">
+                    <div className="w-full">
                         <h2 className="font-bold text-2xl text-blue-500">Login</h2>
                         <p className="text-sm mt-4">
-                            if you already a member, easily log in
+                            if you already a member, easily log in !
                         </p>
                         <form onSubmit={ loginUser } className="flex flex-col gap-6">
                             <input
-                                className="p-2 mt-8 rounded-xl border"
+                                className="w-full p-2 mt-8 border-b bg-secondary bg-opacity-0 rounded outline-none"
                                 type="email"
                                 name="email"
                                 placeholder="E-mail"
@@ -53,7 +54,7 @@ const SignIn = () => {
                             />
                             <div className="relative">
                                 <input
-                                    className="w-full p-2 mt-8 rounded-xl border"
+                                    className="w-full p-2 mt-8 border-b bg-secondary bg-opacity-0 rounded outline-none"
                                     type="password"
                                     name="password"
                                     placeholder="Password"
@@ -84,17 +85,17 @@ const SignIn = () => {
                                     />
                                 </svg>
                             </div>
-
-                            <button className="hover:scale-105 duration-300 bg-blue-500 text-white rounded-md py-2 mt-4">
-                                Login
-                            </button>
+                            <CustomButton type="submit" text="Login" />
                         </form>
                         <p className="mt-5 text-xs border-b border-gray-400 py-4">
                             Forgot your Password
                         </p>
                         <div className="mt-3 text-xs flex justify-between items-center">
                             <p>If you Don't have an account..</p>
-                            <Link to="/SignUp"><button className="hover:scale-105 duration-300 py-2 px-5 bg-white hover:text-black border rounded-xl"> Register </button></Link>
+                            <Link to="/SignUp">
+                                <button className="hover:scale-105 duration-300 py-2 px-5 bg-white rounded-xl hover:bg-green"> Register 
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

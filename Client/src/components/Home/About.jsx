@@ -4,7 +4,7 @@ import img from '../../assets/images/aboutus.jpg'
 const About = () => {
     return (
         <div className="md:my-10 my-16 mx-6 md:mx-16">
-            <div class="bg-[#D4C7A0] bg-opacity-20 rounded flex md:justify-between max-md:flex-col gap-12 px-4 py-4">
+            <div class="bg-secondary bg-opacity-20 rounded flex md:justify-between max-md:flex-col gap-12 px-4 py-4">
                 <div class="w-1/2 h-full max-md:w-full">
                     <img className='rounded' src={img} alt="" />
                 </div>
