@@ -36,14 +36,14 @@ const SignIn = () => {
 
     return (
         <div>
-            <div className="min-h-screen flex justify-center items-center">
-                <div className="bg-secondary md:w-1/3 w-full mx-6 bg-opacity-20 flex rounded-2xl shadow-lg items-center p-6">
+            <div className="flex justify-center my-16 p-4">
+                <div className="bg-secondary md:w-1/3 w-full bg-opacity-20 flex rounded-2xl shadow-lg items-center p-4">
                     <div className="w-full">
                         <h2 className="font-bold text-2xl text-blue-500">Login</h2>
                         <p className="text-sm mt-4">
                             if you already a member, easily log in !
                         </p>
-                        <form onSubmit={ loginUser } className="flex flex-col gap-6">
+                        <form onSubmit={ loginUser } className="flex flex-col gap-12">
                             <input
                                 className="w-full p-2 mt-8 border-b bg-secondary bg-opacity-0 rounded outline-none"
                                 type="email"
@@ -54,7 +54,7 @@ const SignIn = () => {
                             />
                             <div className="relative">
                                 <input
-                                    className="w-full p-2 mt-8 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                    className="w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
                                     type="password"
                                     name="password"
                                     placeholder="Password"
@@ -62,7 +62,7 @@ const SignIn = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <svg
-                                    className="absolute top-1/2 right-3 translate-y-1/2"
+                                    className="absolute top-10 right-3 translate-y-1/2"
                                     width="16px"
                                     height="16px"
                                     viewBox="0 0 24 24"
