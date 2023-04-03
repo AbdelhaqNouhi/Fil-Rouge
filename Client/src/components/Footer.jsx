@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom";    
-import linkedin from '../assets/icons/linkedin.png'
-import facebook from '../assets/icons/facebook.png'
-import twitter from '../assets/icons/twitter.png'
-import instagram from '../assets/icons/instagram.png'
 import logo from '../assets/images/logo.png'
+import linkedin from '../assets/icons/Social/linkedin.png'
+import facebook from '../assets/icons/Social/facebook.png'
+import twitter from '../assets/icons/Social/twitter.png'
+import instagram from '../assets/icons/Social/instagram.png'
 
 
 const Footer = () => {

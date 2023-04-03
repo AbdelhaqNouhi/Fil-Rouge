@@ -14,6 +14,7 @@ module.exports = {
       green: "#A3DE83", // green (light)
       white: "#FFFFFF", // white
       black: "#000000", // black
+      red: "#FF0000", // red
       // tertiary: "#364966", // blue (dark)
       // // the rest follow text color when dark mode is enabled you can change the colors to match your theme
       // quaternary: "#111111", // black (dark) -> for text

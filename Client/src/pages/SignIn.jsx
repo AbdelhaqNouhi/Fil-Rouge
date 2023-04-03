@@ -1,21 +1,42 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom"; 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../components/custom/button/CustomButton";
+import SuccessAlert from '../components/custom/alert/SuccessAlert';
+import FailedAlert from '../components/custom/alert/FailedAlert';
 
 
 const SignIn = () => {
+
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showFailed, setShowFailed] = useState(false);
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const handleSuccess = () => {
+        setShowSuccess(true);
+    };
+
+    const handleFailed = () => {
+        setShowFailed(true);
+    };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowSuccess(false);
+            setShowFailed(false);
+        }, 2000);
+    }, [showSuccess, showFailed]);
+
+
     const loginUser = async (e) => {
         e.preventDefault();
         const User = { email, password };
 
-        await fetch("http://localhost:3000/Api/LoginUser", {
+        await fetch("http://localhost:3000/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(User)
@@ -23,19 +44,29 @@ const SignIn = () => {
         .then((res) => res.json())
         .then((data) => {
             const token = data.token;
-            if(token){
-                localStorage.setItem("token", token);
-                localStorage.setItem("user_id", data.user.id);
-                localStorage.setItem("firstName", data.user.first_name);
-                localStorage.setItem("lastName", data.user.last_name);
-                navigate("/");
+            try {
+                if (token) {
+                    handleSuccess();
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("email", data.email);
+                    localStorage.setItem("firstName", data.first_name);
+                    localStorage.setItem("lastName", data.last_name);
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 1000);
+                } else {
+                    handleFailed();
+                }
+            } catch (error) {
+                console.log(error);
             }
-        })
-        .catch((err) => console.log(err));
+        });
     };
 
     return (
         <div>
+            {showSuccess && <SuccessAlert message="Success!" />}
+            {showFailed && <FailedAlert message="Failed!" />}
             <div className="flex justify-center my-16 p-4">
                 <div className="bg-secondary md:w-1/3 w-full bg-opacity-20 flex rounded-2xl shadow-lg items-center p-4">
                     <div className="w-full">

@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../components/custom/button/CustomButton";
 import SuccessAlert from '../components/custom/alert/SuccessAlert';
+import FailedAlert from '../components/custom/alert/FailedAlert';
 
 const SignUp = () => {
+
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showFailed, setShowFailed] = useState(false);
 
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
@@ -20,12 +23,17 @@ const SignUp = () => {
         setShowSuccess(true);
     };
 
-        // useEffect(() => {
-        //     const timer = setTimeout(() => {
-        //         setShowSuccess(false);
-        //     }, 3000);
-        //     return () => clearTimeout(timer);
-        // }, [showSuccess]);
+    const handleFailed = () => {
+        setShowFailed(true);
+    };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowSuccess(false);
+            setShowFailed(false);
+        }, 2000);
+    }, [showSuccess, showFailed]);
+    
 
     const Register = async (e) => {
         e.preventDefault();
@@ -41,23 +49,26 @@ const SignUp = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data) {
-                    console.log(data);
-                    // window.alert("Registration Successful");
-                    handleSuccess();
-                    console.log("Registration Successful");
-                    // navigate("/SignIn");
+                try {
+                    if (data.statusCode === 500) {
+                        handleFailed();
+                        console.log(data);
+                    } else {
+                        handleSuccess();
+                        setTimeout(() => {
+                            navigate("/signIn");
+                        }, 1000);
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-            })
-            .catch((err) => {
-                window.alert("Invalid Registration");
-                console.log(err);
             })
     }
 
     return (
         <div>
             {showSuccess && <SuccessAlert message="Success!" />}
+            {showFailed && <FailedAlert message="Failed!" />}
             <div className="min-h-screen flex justify-center items-center p-4">
                 <div className="md:w-1/2 bg-secondary bg-opacity-20 w-screen md:px-8 flex rounded-2xl shadow-lg max-w-3/1 items-center p-4">
                     <div className="w-full">
