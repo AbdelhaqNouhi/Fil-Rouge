@@ -168,6 +168,21 @@ function NavBar() {
                 <NavLink to="/" className="flex items-center w-40">
                     <img src={logo} alt="logo" />
                 </NavLink>
+                {isLogged ? (
+                    <div className='flex gap-8 items-center md:hidden'>
+                        <div className='relative left-[-2rem]'>
+                            <svg width="15" height="19" viewBox="0 0 15 19" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.075 12.6562V12.677L13.0896 12.6916L14.95 14.552V15.4187H0.05V14.552L1.91036 12.6916L1.925 12.677V12.6562V7.96875C1.925 5.09878 3.45165 2.72334 6.10532 2.09239L6.14375 2.08326V2.04375V1.40625C6.14375 0.655739 6.74949 0.05 7.5 0.05C8.25051 0.05 8.85625 0.655739 8.85625 1.40625V2.04375V2.08329L8.89472 2.0924C11.5576 2.72333 13.075 5.10801 13.075 7.96875V12.6562ZM11.25 13.6438H11.3V13.5938V7.96875C11.3 6.79644 10.9431 5.72974 10.2886 4.95523C9.63337 4.17991 8.68189 3.7 7.5 3.7C6.31811 3.7 5.36663 4.17991 4.71142 4.95523C4.05689 5.72974 3.7 6.79644 3.7 7.96875V13.5938V13.6438H3.75H11.25ZM9.32432 16.4562C9.29759 17.437 8.48692 18.2313 7.5 18.2313C6.51308 18.2313 5.70241 17.437 5.67568 16.4562H9.32432Z" fill="white" stroke="white" stroke-width="0.1" />
+                            </svg>
+                        </div>
+                        <DropDownLang />
+                        <div className='flex items-center left-[0rem]'>
+                            <DropDownProfile />   
+                        </div>
+                    </div>
+                ) : (
+                    ''
+                )}
                 <div className='flex md:hidden'>
                     <button
                         onClick={() => active()}
@@ -231,19 +246,7 @@ function NavBar() {
                 >
                     <ul >
                         {isLogged ? (
-                            // <div className='flex gap-4 items-center'>
-                            //     <li>
-                            //         <NavLink
-                            //             to={"/profile"}
-                            //             className={({ isActive }) => (isActive ? 'hlock hover:border-b-2 md:p-0' : 'block hover:border-b-2 md:p-0')} >
-                            //             {firstName} {lastName}
-                            //         </NavLink>
-                            //     </li>
-                            //     <li>
-                            //         <CustomButton onClick={() => logOut()} text="Log Out" />
-                            //     </li>
-                            // </div>
-                            <div className='flex gap-8 items-center'>
+                            <div className='flex gap-8 items-center max-sm:hidden'>
                                 <div className='relative left-[-2rem]'>
                                     <svg width="15" height="19" viewBox="0 0 15 19" fill="white" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.075 12.6562V12.677L13.0896 12.6916L14.95 14.552V15.4187H0.05V14.552L1.91036 12.6916L1.925 12.677V12.6562V7.96875C1.925 5.09878 3.45165 2.72334 6.10532 2.09239L6.14375 2.08326V2.04375V1.40625C6.14375 0.655739 6.74949 0.05 7.5 0.05C8.25051 0.05 8.85625 0.655739 8.85625 1.40625V2.04375V2.08329L8.89472 2.0924C11.5576 2.72333 13.075 5.10801 13.075 7.96875V12.6562ZM11.25 13.6438H11.3V13.5938V7.96875C11.3 6.79644 10.9431 5.72974 10.2886 4.95523C9.63337 4.17991 8.68189 3.7 7.5 3.7C6.31811 3.7 5.36663 4.17991 4.71142 4.95523C4.05689 5.72974 3.7 6.79644 3.7 7.96875V13.5938V13.6438H3.75H11.25ZM9.32432 16.4562C9.29759 17.437 8.48692 18.2313 7.5 18.2313C6.51308 18.2313 5.70241 17.437 5.67568 16.4562H9.32432Z" fill="white" stroke="white" stroke-width="0.1" />
