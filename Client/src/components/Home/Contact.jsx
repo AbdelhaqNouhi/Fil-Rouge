@@ -47,16 +47,16 @@ const Contact = () => {
                     <h5 className='font-medium'>If Any question or remarks? Just  fill up the form..!</h5>
                     <div class="flex flex-col gap-8 max-md:gap-4">
                         <div class="flex gap-8 max-md:gap-4 w-full max-md:flex-col">
-                            <input className='p-2 w-full rounded' type="text" name="nom" placeholder="Nom" />
-                            <input className='p-2 w-full rounded' type="text" name="prenome" placeholder="Prenome" />
+                            <input className='p-2 w-full border-b bg-secondary bg-opacity-0 rounded outline-none' type="text" name="nom" placeholder="Nom" />
+                            <input className='p-2 w-full border-b bg-secondary bg-opacity-0 rounded outline-none' type="text" name="prenome" placeholder="Prenome" />
                         </div>
                         <div class="flex gap-8 max-md:gap-4 w-full max-md:flex-col">
-                            <input className='p-2 w-full rounded' type="email" name="email" placeholder="E-mail" />
-                            <input className='p-2 w-full rounded' type="tel" name="phone" placeholder="Phone" />
+                            <input className='p-2 w-full border-b bg-secondary bg-opacity-0 rounded outline-none' type="email" name="email" placeholder="E-mail" />
+                            <input className='p-2 w-full border-b bg-secondary bg-opacity-0 rounded outline-none' type="tel" name="phone" placeholder="Phone" />
                         </div>
                     </div>
                     <div className=''>
-                        <textarea className='w-full p-2 max-h-24 rounded' name="message" placeholder="Message"></textarea>
+                        <textarea className='w-full p-2 max-h-24 border-b bg-secondary bg-opacity-0 rounded outline-none' name="message" placeholder="Message"></textarea>
                     </div>
                     <CustomButton text='Send Message' />
                 </div>
