@@ -2,9 +2,9 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom"; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/custom/button/CustomButton";
-import SuccessAlert from '../components/custom/alert/SuccessAlert';
-import FailedAlert from '../components/custom/alert/FailedAlert';
+import CustomButton from "../../components/custom/button/CustomButton";
+import SuccessAlert from '../../components/custom/alert/SuccessAlert';
+import FailedAlert from '../../components/custom/alert/FailedAlert';
 
 
 const SignIn = () => {

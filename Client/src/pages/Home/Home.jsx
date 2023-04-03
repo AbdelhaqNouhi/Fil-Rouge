@@ -1,13 +1,13 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
-import CustomButton from "../components/custom/button/CustomButton";
-import Background from '../assets/images/Background.png'
-import Background2 from '../assets/images/Background2.png'
 import { useState } from "react";
-import Product from "../components/Home/Product";
-import Service from "../components/Home/Service";
-import About from "../components/Home/About";
-import Contact from "../components/Home/Contact";
+import CustomButton from "../../components/custom/button/CustomButton";
+import Background from '../../assets/images/Background.png'
+import Background2 from '../../assets/images/Background2.png'
+import Product from "../../components/Home/Product";
+import Service from "../../components/Home/Service";
+import About from "../../components/Home/About";
+import Contact from "../../components/Home/Contact";
 
 const Home = () => {
     const [title, setTitle] = useState('OPEN MY ACCOUNT');
