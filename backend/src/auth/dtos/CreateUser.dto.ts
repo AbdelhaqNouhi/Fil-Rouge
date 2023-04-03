@@ -20,5 +20,5 @@ export class CreateUserDto {
     password: string;
 
     @IsNotEmpty()
-    adress: String;
+    address: String;
 }

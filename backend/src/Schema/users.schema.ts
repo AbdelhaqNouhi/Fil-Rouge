@@ -22,7 +22,7 @@ export class User {
     password: String;
     
     @Prop({ required: true })
-    adress: String;
+    address: String;
 
     @Prop({ type: [{ type: RoleSchema }] })
     roles: Role[];

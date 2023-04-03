@@ -16,7 +16,6 @@ export class AuthService {
         private jwtService: JwtService
     ) {}
 
-
     async CreateUser(userData: CreateUserDto) {
         const hashedPassword = hashPassword(userData.password);
         const newUser = new this.UserModule({ ...userData, password: hashedPassword });

@@ -1,42 +1,63 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom"; 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../components/custom/button/CustomButton";
+import SuccessAlert from '../components/custom/alert/SuccessAlert';
 
 const SignUp = () => {
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const navigate = useNavigate();
-    const [first_name, setFirstName] = useState("");
-    const [last_name, setLastName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const handleSuccess = () => {
+        setShowSuccess(true);
+    };
+
+        // useEffect(() => {
+        //     const timer = setTimeout(() => {
+        //         setShowSuccess(false);
+        //     }, 3000);
+        //     return () => clearTimeout(timer);
+        // }, [showSuccess]);
+
     const Register = async (e) => {
         e.preventDefault();
-        const data = { first_name, last_name, phone, address, email, password };
-        console.log(data);
+        const data = { firstName, lastName, phone, address, email, password };
 
-        await fetch("http://localhost:3000/Api/RegisterUser", {
+        await fetch("http://localhost:3000/auth/create", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "POST",
+            },
             body: JSON.stringify(data)
         })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data) {
-                navigate("/SignIn");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data) {
+                    console.log(data);
+                    // window.alert("Registration Successful");
+                    handleSuccess();
+                    console.log("Registration Successful");
+                    // navigate("/SignIn");
+                }
+            })
+            .catch((err) => {
+                window.alert("Invalid Registration");
+                console.log(err);
+            })
     }
 
     return (
         <div>
+            {showSuccess && <SuccessAlert message="Success!" />}
             <div className="min-h-screen flex justify-center items-center p-4">
                 <div className="md:w-1/2 bg-secondary bg-opacity-20 w-screen md:px-8 flex rounded-2xl shadow-lg max-w-3/1 items-center p-4">
                     <div className="w-full">
@@ -48,18 +69,18 @@ const SignUp = () => {
                             <div className='flex gap-10 mt-8 max-md:flex-col'>
                                 <input 
                                     type="text"
-                                    name="first_name"
+                                    name="firstName"
                                     placeholder="First Name"
                                     className="w-1/2 max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
-                                    value={first_name}
+                                    value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
                                 />
                                 <input 
                                     type="text"
-                                    name="last_name"
+                                    name="lastName"
                                     placeholder="Last Name"
                                     className="w-1/2 max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
-                                    value={last_name}
+                                    value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
                             </div>
