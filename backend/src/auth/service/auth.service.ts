@@ -2,7 +2,7 @@ import { AuthDto } from '../dtos/Auth.dto';
 import { CreateUserDto } from '../dtos/CreateUser.dto';
 import { hashPassword } from '../utiles/bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { User, UserDocument } from 'src/Schema/users.schema';
+import { User, UserDocument } from 'src/Schema/User/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';

@@ -1,6 +1,6 @@
 import { UsersModule } from './../users.module';
 import { CreateUserDto } from '../../auth/dtos/CreateUser.dto';
-import { User, UserDocument } from '../../Schema/users.schema';
+import { User, UserDocument } from '../../Schema/User/users.schema';
 import { Model } from 'mongoose';
 import { Injectable, NotFoundException, BadRequestException, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';

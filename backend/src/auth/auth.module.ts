@@ -1,10 +1,9 @@
-import { RolesGuard } from './guard/roles.guard';
 import { JwtStrategy } from './utiles/Jwt.strategy';
 import { Module } from '@nestjs/common';
 import { AuthService } from './service/auth.service';
 import { AuthController } from './controller/auth.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../Schema/users.schema';
+import { User, UserSchema } from '../Schema/User/users.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { config } from 'dotenv'; config();
@@ -19,11 +18,9 @@ import { APP_GUARD } from '@nestjs/core';
   }),
 ],
 controllers: [AuthController],
-providers: [AuthService, JwtStrategy,
-  {
-    provide: APP_GUARD,
-    useValue: RolesGuard,
-  },
-],
+providers: [AuthService, JwtStrategy, {
+  provide: APP_GUARD,
+  useClass: JwtStrategy,
+}],
 })
 export class AuthModule {}
