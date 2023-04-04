@@ -222,17 +222,17 @@ function NavBar() {
                         <li className='flex gap-20 max-md:flex-col max-md:gap-12 items-center'>
                             <NavLink 
                                 to={"/"}
-                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
+                                className={({ isActive }) => (isActive ? 'block border-green border-b-2' : 'block hover:border-b-2 md:p-0 border-green')} >
                                 Home 
                             </NavLink>
                             <NavLink
                                 to={"/Store"}
-                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
+                                className={({ isActive }) => (isActive ? 'block border-green border-b-2' : 'block hover:border-b-2 md:p-0 border-green')} >
                                 Store
                             </NavLink>  
                             <NavLink
                                 to={"/ContactUs"}
-                                className={({ isActive }) => (isActive ? 'block text-white border-b-2' : 'block hover:border-b-2 md:p-0')} >
+                                className={({ isActive }) => (isActive ? 'block border-green border-b-2' : 'block hover:border-b-2 md:p-0 border-green')} >
                                 ContactUs
                             </NavLink>
                         </li>

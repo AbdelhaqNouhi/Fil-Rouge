@@ -12,7 +12,7 @@ import ErrorPage from './pages/error/ErrorPage'
 function App() {
 
   return (
-    <div className="App font-body">
+    <div className="App font-body bg-secondary bg-opacity-5">
       <Router>
         <NavBar />
 
@@ -22,7 +22,7 @@ function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/store" element={<Store />} />
-          
+
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         

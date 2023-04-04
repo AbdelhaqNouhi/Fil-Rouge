@@ -13,7 +13,7 @@ const Home = () => {
     const [title, setTitle] = useState('OPEN MY ACCOUNT');
     
     return (
-        <div className="flex flex-col md:gap-8">
+        <div className="flex flex-col md:gap-8 ">
             <div className="w-ful h-screen">
                 <div className="absolute bg-black opacity-50 w-full h-full"></div>
                 <div className="max-sm:flex justify-center">
