@@ -8,6 +8,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { config } from 'dotenv'; config();
 import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from '../auth/guard/roles.guard';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
@@ -18,7 +19,7 @@ import { APP_GUARD } from '@nestjs/core';
   }),
 ],
 controllers: [AuthController],
-providers: [AuthService, JwtStrategy, {
+providers: [AuthService, JwtStrategy, RolesGuard, {
   provide: APP_GUARD,
   useClass: JwtStrategy,
 }],
