@@ -6,22 +6,25 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../Schema/User/users.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { config } from 'dotenv'; config();
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '../auth/guard/roles.guard';
+import { config } from 'dotenv'; config();
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   PassportModule,
   JwtModule.register({
     secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '60s' },
+    signOptions: { expiresIn: '600s' },
   }),
 ],
 controllers: [AuthController],
-providers: [AuthService, JwtStrategy, RolesGuard, {
-  provide: APP_GUARD,
-  useClass: JwtStrategy,
-}],
+providers: [AuthService, JwtStrategy,
+  {
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  },
+],
+
 })
 export class AuthModule {}

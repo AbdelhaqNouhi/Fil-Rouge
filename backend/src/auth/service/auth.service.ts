@@ -14,8 +14,8 @@ import { config } from 'dotenv'; config();
 @Injectable()
 export class AuthService {
     constructor(@InjectModel(User.name) 
-        private UserModule: Model<UserDocument>, 
-        private jwtService: JwtService
+        private UserModule: Model<UserDocument>,
+        private readonly jwtService: JwtService
     ) {}
 
     async CreateUser(userData: CreateUserDto) {
@@ -65,12 +65,12 @@ export class AuthService {
             throw new HttpException('invalid email or password', HttpStatus.BAD_REQUEST);
         }
 
-        const token = this.jwtService.sign({id: user._id, fiest_name: user.firstName, last_name: user.lastName});
+        const token = this.jwtService.sign({id: user._id, first_name: user.firstName, last_name: user.lastName, email: user.email, role: user.role});
         const LogUser = {
             token,
-            email: user.email,
             first_name: user.firstName,
             last_name: user.lastName,
+            email: user.email,
             role: user.role
         }
         return LogUser;
