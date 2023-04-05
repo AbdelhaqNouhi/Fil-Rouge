@@ -7,6 +7,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import {JwtService} from '@nestjs/jwt';
+import { Role } from 'src/Schema/Role/role.enum';
+import { config } from 'dotenv'; config();
 
 
 @Injectable()
@@ -21,6 +23,11 @@ export class AuthService {
         const newUser = new this.UserModule({ ...userData, password: hashedPassword });
 
         const userExist = await this.UserModule.findOne({ email: userData.email }).exec();
+
+        if (newUser.email === process.env.ADMIN_EMAIL.toLocaleLowerCase()){
+            newUser.role = Role.Admin;
+        }
+
         if (userExist) {
             throw new HttpException('User already exist!', HttpStatus.BAD_REQUEST);
         }
@@ -28,7 +35,6 @@ export class AuthService {
         if (!user) {
             throw new HttpException('User not created!', HttpStatus.BAD_REQUEST);
         }
-
         const token = this.jwtService.sign({
             id: user._id, 
             email: user.email, 
@@ -65,6 +71,7 @@ export class AuthService {
             email: user.email,
             first_name: user.firstName,
             last_name: user.lastName,
+            role: user.role
         }
         return LogUser;
     }

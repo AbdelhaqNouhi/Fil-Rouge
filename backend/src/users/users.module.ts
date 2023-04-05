@@ -5,12 +5,20 @@ import { UsersController } from './controller/users.controller';
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { User, UserSchema } from '../Schema/User/users.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtStrategy } from '../auth//utiles/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from '../auth/guard/roles.guard';
 
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
   exports: [UsersService]
 })
 export class UsersModule implements NestModule {
