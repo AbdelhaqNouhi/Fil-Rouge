@@ -6,6 +6,10 @@ import SignIn from "./pages/auth/SignIn"
 import SignUp from "./pages/auth/SignUp"
 import Profile from "./pages/client/Profile"
 import Store from "./pages/stor/Store"
+import Admin from "./components/Admin/Admin"
+import Product_Dash from "./components/Admin/Product_Dash"
+import Users_Dash from "./components/Admin/User_Dash"
+import LoginAdmin from "./components/Admin/LoginAdmin"
 
 import ErrorPage from './pages/error/ErrorPage'
 
@@ -14,7 +18,7 @@ function App() {
   return (
     <div className="App font-body bg-secondary bg-opacity-5">
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,10 +27,15 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/store" element={<Store />} />
 
+          <Route path="/Dashboard" element={<Admin />} />
+          <Route path="/Dashboard" element={<Product_Dash />} />
+          <Route path="/User" element={<Users_Dash />} />
+          <Route path="/LoginAdmin" element={<LoginAdmin />} />
+
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   )

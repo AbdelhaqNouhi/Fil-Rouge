@@ -1,6 +1,5 @@
 import { UsersService } from '../service/users.service';
-import { Controller, Get, Post, Body, Req, Res, Param, ParseIntPipe, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
-import { UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Res, Param, UseGuards, UsePipes } from '@nestjs/common';
 import { ValidateUserPipe } from '../../auth/pipes/validate-user.pipe';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { Role } from '../../Schema/Role/role.enum';
