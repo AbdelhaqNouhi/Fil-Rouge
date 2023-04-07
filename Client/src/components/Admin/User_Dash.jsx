@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import NavBar from './NavBar'
-import NavItems from './NavItems'
+import NavBar from './NavBarAdmin'
 
 const User_Dash = () => {
 
@@ -21,7 +20,6 @@ const User_Dash = () => {
             {/* className='flex justify-center w-full */}
             <NavBar />
             <div className='flex'>
-                <NavItems />
                 <div class="flex flex-col mt-6 w-full p-8">
                     <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 ">
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">

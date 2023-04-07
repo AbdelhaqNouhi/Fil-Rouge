@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import NavBar from './components/NavBar'
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 import Footer from './components/Footer'
 import Home from './pages/Home/Home'
 import SignIn from "./pages/auth/SignIn"
@@ -10,16 +9,20 @@ import Admin from "./components/Admin/Admin"
 import Product_Dash from "./components/Admin/Product_Dash"
 import Users_Dash from "./components/Admin/User_Dash"
 import LoginAdmin from "./components/Admin/LoginAdmin"
+import user from './routes/user.routes'
+import admin from './routes/admin.routes'
+import NavBar from './components/NavBar'
+import NavBarAdmin from './components/Admin/NavBarAdmin'
 
 import ErrorPage from './pages/error/ErrorPage'
 
 function App() {
-
+  
   return (
     <div className="App font-body bg-secondary bg-opacity-5">
       <Router>
-        {/* <NavBar /> */}
-
+        {/* {isAdmin ? <NavBarAdmin /> : <NavBar />} */}
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
@@ -34,8 +37,8 @@ function App() {
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        
-        {/* <Footer /> */}
+
+        {/* {isAdmin ? '' : <Footer />} */}
       </Router>
     </div>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
-import NavBar from './NavBar'
-import NavItems from './NavItems'
+import NavBar from './NavBarAdmin'
 import Product_Dash from './Product_Dash'
 
 const Admin = () => {
@@ -8,7 +7,7 @@ const Admin = () => {
         <div>
             <NavBar />
             <div className='flex'>
-                <NavItems />
+                {/* <NavItems /> */}
                 <div className='flex justify-center w-full '>
                     <Product_Dash />
                 </div>

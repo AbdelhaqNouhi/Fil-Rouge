@@ -1,48 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import AsyncSelect from "react-select/async";
-import AddTravelForm from './AddTravelForm'
+import AddProductForm from './AddProductForm'
 
 const Product_Dash = () => {
     //  state of modal
     const [showModalAdd, setShowModalAdd] = useState(false)
     const [showModalUpdate, setShowModalUpdate] = useState(false)
 
-
-    const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
-    const [departure_time, setDeparture_time] = useState('');
-    const [departure_date, setDeparture_date] = useState('');
-    const [arrival_time, setArrival_time] = useState('');
-    const [arrival_date, setArrival_date] = useState('');
-    const [seats_total, setSeats_total] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [image, setImage] = useState('');
+
 
     const [formData, setFormData] = useState({
-        id: '',
-        from: '',
-        to: '',
-        departure_time: '',
-        departure_date: '',
-        arrival_time: '',
-        arrival_date: '',
-        seats_total: '',
+        name: '',
+        description: '',
         price: '',
+        image: ''
     })
 
     const handleChange = (e) => {
         setFormData(e.target.value)
     }
 
-    const AddTravel = (e) => {
+    const AddProduct = (e) => {
 
         e.preventDefault();
-        const Travel = { from, to, departure_time, departure_date, arrival_time, arrival_date, seats_total, price }
-        console.log(Travel);
+        const Product = { name, description, price, image}
+        console.log(Product);
 
         fetch('http://localhost:8000/api/CreateTravel', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Travel)
+            body: JSON.stringify(Product)
         }).then((res) => res.json())
         .then(data => {
             if(data) {
@@ -53,13 +44,13 @@ const Product_Dash = () => {
 
     const [box, setBox] = useState([])
 
-    const GetAllTravel = async () => {
-        await fetch('http://localhost:8000/api//GetAllTravel')
+    const GetAllProduct = async () => {
+        await fetch('http://localhost:8000/api//GetAllProduct')
             .then((response) => response.json())
             .then((data) => setBox(data))
     }
 
-    const GetTravelById = async (id) => {
+    const GetProductById= async (id) => {
         // console.log(id);
         await fetch(`http://localhost:8000/api//GetTravelById/` + id, {
             method: 'POST',
@@ -68,16 +59,10 @@ const Product_Dash = () => {
             .then((response) => response.json())
             .then(data => {
                 setFormData({
-                    id: data._id,
-                    from: data.from,
-                    to: data.to,
-                    departure_time: data.departure_time,
-                    departure_date: data.departure_date,
-                    arrival_time: data.departure_time,
-                    arrival_date: data.arrival_date,
-                    seats_total: data.seats_total,
+                    name: data.name,
+                    description: data.description,
                     price: data.price,
-                    admin_id: data.CreatedBy
+                    image: data.image
                 })
             })
         setTimeout(() => {
@@ -85,11 +70,11 @@ const Product_Dash = () => {
         }, 1000);
     }
 
-    const DeleteTravel = async (id) => {
+    const DeleteProduct = async (id) => {
 
         console.log(id);
 
-        await fetch(`http://localhost:8000/api/DeleteTravel/` + id, {
+        await fetch(`http://localhost:8000/api/DeleteProduct/` + id, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" }
         })
@@ -105,139 +90,69 @@ const Product_Dash = () => {
     }
 
     useEffect(() => {
-        GetAllTravel();
+        GetAllProduct();
     }, [])
 
     return (
 
         <div class="flex flex-col mt-6 w-full p-8">
-            <AddTravelForm isVisible={showModalAdd} onClose={() => setShowModalAdd(false)}>
-                <form onSubmit={AddTravel} className='flex flex-col gap-8'>
+            <AddProductForm isVisible={showModalAdd} onClose={() => setShowModalAdd(false)}>
+                <form onSubmit={AddProduct} className='flex flex-col gap-8'>
                     <h1 className="font-bold text-xl">Add A New Travel !</h1>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
-                            <label>From</label>
-                            {/* <AsyncSelect className='text-black'
-                                loadOptions={loadCities}
-                                defaultOptions={cities}
-                                isClearable
-                                value={from.name}
-                                onChange={(e) => setFrom(e.name)}
-                            /> */}
+                            <label>Name</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
-                            <label>To</label>
-                            {/* <AsyncSelect className='text-black'
-                                loadOptions={loadCities}
-                                defaultOptions={cities}
-                                isClearable
-                                value={to.name}
-                                onChange={(e) => setTo(e.name)}
-                            /> */}
+                            <label>Description</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
                     </div>
-
                     <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Departure Time</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="time" id="appt" name="appt" required value={departure_time} onChange={(e) => setDeparture_time(e.target.value)} />
-                        </div>
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Departure Date</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="date" id="date" placeholder="Departure Date" value={departure_date} onChange={(e) => setDeparture_date(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Arrival Time</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="time" id="appt" name="appt" required value={arrival_time} onChange={(e) => setArrival_time(e.target.value)} />
-                        </div>
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Arrival Date</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="date" id="date" placeholder="Arrival Date" value={arrival_date} onChange={(e) => setArrival_date(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Seats Total</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="number" placeholder="Seats Total" value={seats_total} onChange={(e) => setSeats_total(e.target.value)} />
-                        </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Price</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                        </div>
+                        <div className="flex flex-col gap-2 w-64">
+                            <label>Image</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Image" value={image} onChange={(e) => setImage(e.target.value)} />
                         </div>
                     </div>
                     <button className="text-center w-full bg-sky-700 hover:bg-sky-600 p-2 rounded-md">Added One</button>
                 </form>
-            </AddTravelForm>
+            </AddProductForm>
 
-            <AddTravelForm isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)}>
-                <div className='flex flex-col gap-8'>
+            <AddProductForm isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)}>
+                <form onSubmit={AddProduct} className='flex flex-col gap-8'>
                     <h1 className="font-bold text-xl">Add A New Travel !</h1>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
-                            <label>From</label>
-                            {/* <AsyncSelect className='text-black'
-                                loadOptions={loadCities}
-                                defaultOptions={cities}
-                                isClearable
-                                value={formData.from}
-                                onChange={(e) => setFormData(e.name)}
-                            /> */}
+                            <label>Name</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
-                            <label>To</label>
-                            {/* <AsyncSelect className='text-black'
-                                loadOptions={loadCities}
-                                defaultOptions={cities}
-                                isClearable
-                                value={formData.to}
-                                onChange={(e) => setFormData(e.name)}
-                            /> */}
+                            <label>Description</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
                     </div>
-
                     <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Departure Time</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" id="time" name="appt" required value={formData.departure_time} onChange={handleChange} />
-                        </div>
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Departure Date</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" id="date" placeholder="Departure Date" value={formData.departure_date} onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Arrival Time</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="time" id="appt" name="appt" required value={formData.arrival_time} onChange={handleChange} />
-                        </div>
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Arrival Date</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="date" id="date"  placeholder="Arrival Date" value={formData.arrival_date} onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <div className="flex gap-6">
-                        <div className="flex flex-col gap-2 w-64">
-                            <label>Seats Total</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="number" placeholder="Seats Total" value={formData.seats_total} onChange={handleChange} />
-                        </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Price</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="number" placeholder="Price" value={formData.price} onChange={handleChange} />
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                        </div>
+                        <div className="flex flex-col gap-2 w-64">
+                            <label>Image</label>
+                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Image" value={image} onChange={(e) => setImage(e.target.value)} />
                         </div>
                     </div>
-                    <button className="text-center w-full bg-sky-700 hover:bg-sky-600 p-2 rounded-md">Update Travel</button>
-                </div>
-            </AddTravelForm>
+                    <button className="text-center w-full bg-sky-700 hover:bg-sky-600 p-2 rounded-md">Added One</button>
+                </form>
+            </AddProductForm>
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 ">
                 <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                     <div className='flex justify-between px-8 py-4 bg-white items-center text-center'>
-                        <h1 className='font-bold'>Lists travel</h1>
+                        <h1 className='font-bold'>Lists Products</h1>
                         <button onClick={() => setShowModalAdd(true)} className='text-center bg-sky-600 text-white py-1.5 px-2 rounded font-bold w-32'> Add Travel </button>
                     </div>
                     <table class="min-w-full">
@@ -247,29 +162,17 @@ const Product_Dash = () => {
                                     _id
                                 </th> */}
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    From
+                                    name
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    To
+                                    description
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    departure_date_time
+                                    price
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    arrival_date_time
+                                    image
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    seats_total
-                                </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    Price
-                                </th>
-                                {/* <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    reserved_seat
-                                </th> */}
-                                {/* <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                                    Break_point
-                                </th> */}
                                 <th class="px-6 py-3 bg-gray-100 border-b border-gray-200">
                                     More
                                 </th>
@@ -289,46 +192,25 @@ const Product_Dash = () => {
                                 </td> */}
                                     <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                         <div class="text-sm leading-5 text-gray-900">
-                                            {boxObj.from}
+                                            {boxObj.name}
                                         </div>
                                     </td>
-
                                     <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-yellow-100 rounded-full">
-                                            {boxObj.to}
+                                            {boxObj.description}
                                         </span>
                                     </td>
-
-                                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                        {boxObj.departure_date} at {boxObj.departure_time}
-                                    </td>
-
-                                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                        {boxObj.arrival_date} at {boxObj.arrival_time}
-                                    </td>
-
-                                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                        {boxObj.seats_total}
-                                    </td>
-
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
                                         {boxObj.price}
                                     </td>
-
-                                    {/* <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                    {boxObj.reserved_seat}
-                                </td> */}
-
-                                    {/* <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                    {boxObj.Break_point}
-                                </td> */}
-
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
+                                        {boxObj.image}
+                                    </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                                         <div class="flex justify-around">
                                             <span class="text-yellow-500 flex justify-center">
-
                                                 {/* <form> */}
-                                                    <button onClick={() => DeleteTravel(boxObj._id)} class="mx-1 px-2 rounded-md" >
+                                                    <button onClick={() => DeleteProduct(boxObj._id)} class="mx-1 px-2 rounded-md" >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             class="h-5 w-5 text-red-700"

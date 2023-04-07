@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddTravelForm = ( {isVisible, onClose, children }) => {
+const AddProductForm = ( {isVisible, onClose, children }) => {
     if (!isVisible ) return null;
 
     const handelClose = (e) => {
@@ -23,4 +23,4 @@ const AddTravelForm = ( {isVisible, onClose, children }) => {
     )
 }
 
-export default AddTravelForm
+export default AddProductForm
