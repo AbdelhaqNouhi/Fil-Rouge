@@ -8,11 +8,8 @@ import Store from "./pages/stor/Store"
 import Admin from "./components/Admin/Admin"
 import Product_Dash from "./components/Admin/Product_Dash"
 import Users_Dash from "./components/Admin/User_Dash"
-import LoginAdmin from "./components/Admin/LoginAdmin"
-import user from './routes/user.routes'
-import admin from './routes/admin.routes'
 import NavBar from './components/NavBar'
-import NavBarAdmin from './components/Admin/NavBarAdmin'
+import NavBar_Dash from './components/Admin/NavBar_Dash'
 
 import ErrorPage from './pages/error/ErrorPage'
 
@@ -30,10 +27,10 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/store" element={<Store />} />
 
-          <Route path="/Dashboard" element={<Admin />} />
-          <Route path="/Dashboard" element={<Product_Dash />} />
-          <Route path="/User" element={<Users_Dash />} />
-          <Route path="/LoginAdmin" element={<LoginAdmin />} />
+          <Route path="/admin" element={<Admin />}>
+            <Route path="/admin/Products" element={<Product_Dash />} />
+            <Route path="/admin/users" element={<Users_Dash />} />
+          </Route>
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>

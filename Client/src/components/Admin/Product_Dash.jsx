@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import AsyncSelect from "react-select/async";
 import AddProductForm from './AddProductForm'
+import SideBar from './SideBar'
+import CustomButton from '../custom/button/CustomButton';
 
 const Product_Dash = () => {
     //  state of modal
@@ -27,7 +29,7 @@ const Product_Dash = () => {
     const AddProduct = (e) => {
 
         e.preventDefault();
-        const Product = { name, description, price, image}
+        const Product = { name, description, price, image }
         console.log(Product);
 
         fetch('http://localhost:8000/api/CreateTravel', {
@@ -35,11 +37,11 @@ const Product_Dash = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(Product)
         }).then((res) => res.json())
-        .then(data => {
-            if(data) {
-                setShowModalAdd(false)
-            }
-        })
+            .then(data => {
+                if (data) {
+                    setShowModalAdd(false)
+                }
+            })
     }
 
     const [box, setBox] = useState([])
@@ -50,7 +52,7 @@ const Product_Dash = () => {
             .then((data) => setBox(data))
     }
 
-    const GetProductById= async (id) => {
+    const GetProductById = async (id) => {
         // console.log(id);
         await fetch(`http://localhost:8000/api//GetTravelById/` + id, {
             method: 'POST',
@@ -97,29 +99,57 @@ const Product_Dash = () => {
 
         <div class="flex flex-col mt-6 w-full p-8">
             <AddProductForm isVisible={showModalAdd} onClose={() => setShowModalAdd(false)}>
-                <form onSubmit={AddProduct} className='flex flex-col gap-8'>
+                <form onSubmit={AddProduct} className='flex flex-col gap-8 text-black'>
                     <h1 className="font-bold text-xl">Add A New Travel !</h1>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
                             <label>Name</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input
+                                type="text"
+                                name="Name"
+                                placeholder="Name"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Description</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <input
+                                type="text"
+                                name="description"
+                                placeholder="Description"
+                                className=" max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
                             <label>Price</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            <input
+                                type="text"
+                                name="price"
+                                placeholder="Price"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Image</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Image" value={image} onChange={(e) => setImage(e.target.value)} />
+                            <input
+                                type="text"
+                                name="image"
+                                placeholder="Image"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            />
                         </div>
                     </div>
-                    <button className="text-center w-full bg-sky-700 hover:bg-sky-600 p-2 rounded-md">Added One</button>
+                    <CustomButton text={'Add One'} />
                 </form>
             </AddProductForm>
 
@@ -153,7 +183,8 @@ const Product_Dash = () => {
                 <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                     <div className='flex justify-between px-8 py-4 bg-white items-center text-center'>
                         <h1 className='font-bold'>Lists Products</h1>
-                        <button onClick={() => setShowModalAdd(true)} className='text-center bg-sky-600 text-white py-1.5 px-2 rounded font-bold w-32'> Add Travel </button>
+                        {/* <button onClick={() => setShowModalAdd(true)} className='text-center bg-green text-white py-1.5 px-2 rounded font-bold w-32'> Add Travel </button> */}
+                        <CustomButton onPress={() => setShowModalAdd(true)} text="Add Product" />
                     </div>
                     <table class="min-w-full">
                         <thead>
@@ -210,35 +241,35 @@ const Product_Dash = () => {
                                         <div class="flex justify-around">
                                             <span class="text-yellow-500 flex justify-center">
                                                 {/* <form> */}
-                                                    <button onClick={() => DeleteProduct(boxObj._id)} class="mx-1 px-2 rounded-md" >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5 text-red-700"
-                                                            viewBox="0 0 20 20"
-                                                            fill="currentColor"
-                                                        >
-                                                            <path
-                                                                fill-rule="evenodd"
-                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                clip-rule="evenodd"
-                                                            />
-                                                        </svg>
-                                                    </button>
+                                                <button onClick={() => DeleteProduct(boxObj._id)} class="mx-1 px-2 rounded-md" >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-5 w-5 text-red-700"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                            clip-rule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
 
-                                                    <button onClick={() => setShowModalUpdate(true) || GetTravelById(boxObj._id)} class="mx-1 px-2 rounded-md" >
-                                                        <svg id="Layer_1" data-name="Layer 1"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4 text-green-700"
-                                                            viewBox="0 0 122.61 122.88"
-                                                            fill="currentColor"
-                                                        >
-                                                            <path
-                                                                fill-rule="evenodd"
-                                                                d="M111.9,61.57a5.36,5.36,0,0,1,10.71,0A61.3,61.3,0,0,1,17.54,104.48v12.35a5.36,5.36,0,0,1-10.72,0V89.31A5.36,5.36,0,0,1,12.18,84H40a5.36,5.36,0,1,1,0,10.71H23a50.6,50.6,0,0,0,88.87-33.1ZM106.6,5.36a5.36,5.36,0,1,1,10.71,0V33.14A5.36,5.36,0,0,1,112,38.49H84.44a5.36,5.36,0,1,1,0-10.71H99A50.6,50.6,0,0,0,10.71,61.57,5.36,5.36,0,1,1,0,61.57,61.31,61.31,0,0,1,91.07,8,61.83,61.83,0,0,1,106.6,20.27V5.36Z"
-                                                                clip-rule="evenodd"
-                                                            />
-                                                        </svg>
-                                                    </button>
+                                                <button onClick={() => setShowModalUpdate(true) || GetTravelById(boxObj._id)} class="mx-1 px-2 rounded-md" >
+                                                    <svg id="Layer_1" data-name="Layer 1"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-4 w-4 text-green-700"
+                                                        viewBox="0 0 122.61 122.88"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M111.9,61.57a5.36,5.36,0,0,1,10.71,0A61.3,61.3,0,0,1,17.54,104.48v12.35a5.36,5.36,0,0,1-10.72,0V89.31A5.36,5.36,0,0,1,12.18,84H40a5.36,5.36,0,1,1,0,10.71H23a50.6,50.6,0,0,0,88.87-33.1ZM106.6,5.36a5.36,5.36,0,1,1,10.71,0V33.14A5.36,5.36,0,0,1,112,38.49H84.44a5.36,5.36,0,1,1,0-10.71H99A50.6,50.6,0,0,0,10.71,61.57,5.36,5.36,0,1,1,0,61.57,61.31,61.31,0,0,1,91.07,8,61.83,61.83,0,0,1,106.6,20.27V5.36Z"
+                                                            clip-rule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
                                                 {/* </form> */}
                                             </span>
                                         </div>
