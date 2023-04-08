@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import AsyncSelect from "react-select/async";
-import AddProductForm from './AddProductForm'
-import SideBar from './SideBar'
+import AddProductForm from './Button/AddProductForm';
 import CustomButton from '../custom/button/CustomButton';
 
 const Product_Dash = () => {
@@ -13,9 +11,11 @@ const Product_Dash = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
+    const token = localStorage.getItem("token");
 
 
     const [formData, setFormData] = useState({
+        id: '',
         name: '',
         description: '',
         price: '',
@@ -27,14 +27,14 @@ const Product_Dash = () => {
     }
 
     const AddProduct = (e) => {
-
         e.preventDefault();
-        const Product = { name, description, price, image }
-        console.log(Product);
-
-        fetch('http://localhost:8000/api/CreateTravel', {
+        const Product = { name, description, price, image };
+        fetch('http://localhost:3000/product/create', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             body: JSON.stringify(Product)
         }).then((res) => res.json())
             .then(data => {
@@ -47,20 +47,29 @@ const Product_Dash = () => {
     const [box, setBox] = useState([])
 
     const GetAllProduct = async () => {
-        await fetch('http://localhost:8000/api//GetAllProduct')
-            .then((response) => response.json())
-            .then((data) => setBox(data))
+        await fetch('http://localhost:3000/product/getAll', {
+            method: 'GET',
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => setBox(data))
     }
 
-    const GetProductById = async (id) => {
-        // console.log(id);
-        await fetch(`http://localhost:8000/api//GetTravelById/` + id, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" }
+    const GetTravelById = async (id) => {
+        await fetch(`http://localhost:3000/product/` + id, {
+            method: 'GET',
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
             .then((response) => response.json())
             .then(data => {
                 setFormData({
+                    id: data._id,
                     name: data.name,
                     description: data.description,
                     price: data.price,
@@ -70,25 +79,53 @@ const Product_Dash = () => {
         setTimeout(() => {
             console.log(formData)
         }, 1000);
+        UpdateProduct(id)
+    }
+
+
+    const UpdateProduct = async (id) => {
+        await fetch(`http://localhost:3000/product/` + id, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                description: formData.description,
+                price: formData.price,
+                image: formData.image
+            })
+        })
+        .then((response) => response.json())
+        .then(data => {
+            if (data.msg === 'success') {
+                console.log(data);
+            }
+            else {
+                console.log('error');
+            }
+        })
     }
 
     const DeleteProduct = async (id) => {
-
-        console.log(id);
-
-        await fetch(`http://localhost:8000/api/DeleteProduct/` + id, {
+        e.preventDefault();
+        await fetch(`http://localhost:3000/product/` + id, {
             method: 'DELETE',
-            headers: { "Content-Type": "application/json" }
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
         })
-            .then((response) => response.json())
-            .then(data => {
-                if (data.msg === 'success') {
-                    console.log(data);
-                }
-                else {
-                    console.log('error');
-                }
-            })
+        .then((response) => response.json())
+        .then(data => {
+            if (data.msg === 'success') {
+                console.log(data);
+            }
+            else {
+                console.log('error');
+            }
+        })
     }
 
     useEffect(() => {
@@ -154,29 +191,57 @@ const Product_Dash = () => {
             </AddProductForm>
 
             <AddProductForm isVisible={showModalUpdate} onClose={() => setShowModalUpdate(false)}>
-                <form onSubmit={AddProduct} className='flex flex-col gap-8'>
-                    <h1 className="font-bold text-xl">Add A New Travel !</h1>
+                <form onSubmit={UpdateProduct(formData.id)} className='flex flex-col gap-8'>
+                    <h1 className="font-bold text-xl">Update Travel !</h1>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
                             <label>Name</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input
+                                type="text"
+                                name="Name"
+                                placeholder="Name"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Description</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <input
+                                type="text"
+                                name="description"
+                                placeholder="Description"
+                                className=" max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={formData.description}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     <div className="flex gap-6">
                         <div className="flex flex-col gap-2 w-64">
                             <label>Price</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                            <input
+                                type="text"
+                                name="price"
+                                placeholder="Price"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={formData.price}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="flex flex-col gap-2 w-64">
                             <label>Image</label>
-                            <input className="text-slate-400 bg-white p-2 rounded-md" type="text" placeholder="Image" value={image} onChange={(e) => setImage(e.target.value)} />
+                            <input
+                                type="text"
+                                name="image"
+                                placeholder="Image"
+                                className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
+                                value={formData.image}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
-                    <button className="text-center w-full bg-sky-700 hover:bg-sky-600 p-2 rounded-md">Added One</button>
+                    <CustomButton text={'Update Product'} />
                 </form>
             </AddProductForm>
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 ">
@@ -189,9 +254,9 @@ const Product_Dash = () => {
                     <table class="min-w-full">
                         <thead>
                             <tr>
-                                {/* <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                                     _id
-                                </th> */}
+                                </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                                     name
                                 </th>
@@ -212,15 +277,15 @@ const Product_Dash = () => {
                         <tbody class="bg-white">
                             {box && box.length > 0 && box.map((boxObj, index) => (
                                 <tr>
-                                    {/* <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="ml-4">
-                                            <div class="text-sm leading-5 text-gray-500">
-                                                {boxObj._id}
+                                    <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="ml-4">
+                                                <div class="text-sm leading-5 text-gray-500">
+                                                    {boxObj._id}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td> */}
+                                    </td>
                                     <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                         <div class="text-sm leading-5 text-gray-900">
                                             {boxObj.name}

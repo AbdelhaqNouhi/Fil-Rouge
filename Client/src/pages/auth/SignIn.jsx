@@ -51,8 +51,13 @@ const SignIn = () => {
                     localStorage.setItem("email", data.email);
                     localStorage.setItem("firstName", data.first_name);
                     localStorage.setItem("lastName", data.last_name);
+                    localStorage.setItem("role", data.role);
                     setTimeout(() => {
-                        navigate("/");
+                        if (data.role === "admin") {
+                            navigate("/admin/products");
+                        } else {
+                            navigate("/");
+                        }
                     }, 1000);
                 } else {
                     handleFailed();

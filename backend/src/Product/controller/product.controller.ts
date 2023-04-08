@@ -37,7 +37,7 @@ export class ProductController {
         return ProductId;
     }
 
-    @Put(':id')
+    @Post(':id')
     @Roles(Role.Admin)
     @UseGuards(RolesGuard)
     Update(@Param('id') id: any, @Body() productData: ProductDto) {

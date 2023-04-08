@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import SideBar from './SideBar'
+import ProfileImg from '../../assets/images/Profile/Profile.png'
 
 const User_Dash = () => {
 
     const [box, setBox] = useState([])
+    const token = localStorage.getItem("token");
 
     const GetAllUser = () => {
-        fetch('http://localhost:8000/api/GetAllUser')
+        fetch('http://localhost:3000/users/getAll', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((res) => res.json())
             .then((data) => setBox(data))
     }
@@ -51,7 +59,7 @@ const User_Dash = () => {
                                             <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0 w-10 h-10">
-                                                        <img class="w-10 h-10 rounded-full object-cover" src={require("../../assets/images/user-image.JPG")} alt="profile pic" />
+                                                        <img class="w-10 h-10 rounded-full object-cover" src={ProfileImg} alt="profile pic" />
                                                     </div>
 
                                                     <div class="ml-4">

@@ -18,7 +18,9 @@ function App() {
   return (
     <div className="App font-body bg-secondary bg-opacity-5">
       <Router>
-        {/* {isAdmin ? <NavBarAdmin /> : <NavBar />} */}
+        {/* {isAdmin ? <NavBarAdmin /> : <NavBar />}: */}
+
+        <NavBar />
         
         <Routes>
           <Route path="/" element={<Home />} />
