@@ -9,52 +9,69 @@ import germany from '../assets/icons//dropDown/germany.svg';
 import nederlands from '../assets/icons//dropDown/nederlands.svg';
 import spain from '../assets/icons//dropDown/spain.svg';
 
+
 function DropDownLang() {
 
     const [openLang, setOpenLang] = useState(false);
     const [lang, setLang] = useState([
         {
             id: 1,
-            img: english,
+            img: Profile,
             name: 'English',
+            discription: 'English',
         },
         {
             id: 2,
-            img: france,
+            img: Profile,
             name: 'France',
+            discription: 'English',
         },
         {
             id: 3,
-            img: germany,
+            img: Profile,
             name: 'Germany',
+            discription: 'English',
         },
         {
             id: 4,
-            img: nederlands,
+            img: Profile,
             name: 'Nederlands',
+            discription: 'English',
         },
         {
-            id: 5,
-            img: spain,
-            name: 'Spain',
-        }
+            id: 4,
+            img: Profile,
+            name: 'Nederlands',
+            discription: 'English',
+        },
+        {
+            id: 4,
+            img: Profile,
+            name: 'Nederlands',
+            discription: 'English',
+        },
     ]);
 
     return (
-        <div className='flex items-center mt-1 absolute'>
+        <div className=''>
             <div>
                 <button
                     onClick={() => setOpenLang((event) => !event)}
                     className=''>
-                    <img className='w-6 h-6 rounded-full' src={english} alt="" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22px" height="22px" fill='white'><path d="M 16 3 C 13.253906 3 11 5.253906 11 8 L 11 9 L 6.0625 9 L 6 9.9375 L 5 27.9375 L 4.9375 29 L 27.0625 29 L 27 27.9375 L 26 9.9375 L 25.9375 9 L 21 9 L 21 8 C 21 5.253906 18.746094 3 16 3 Z M 16 5 C 17.65625 5 19 6.34375 19 8 L 19 9 L 13 9 L 13 8 C 13 6.34375 14.34375 5 16 5 Z M 7.9375 11 L 11 11 L 11 14 L 13 14 L 13 11 L 19 11 L 19 14 L 21 14 L 21 11 L 24.0625 11 L 24.9375 27 L 7.0625 27 Z" /></svg>
                 </button>
             </div>
             {openLang && (
-                <div className=' mt-56 ml-[-8rem] rounded bg-white w-[133px] border'>
+                <div className='mt-[1.5rem] md:ml-[-14rem] ml-[-19rem] rounded bg-green w-[440px] absolute'>
                     {lang.map((langs, index) => (
-                        <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-black border-l-4 flex gap-3'>
-                            <img src={langs.img} alt="" />
-                            <p className='text-black'>{langs.name}</p>
+                        <div className='flex gap-4'>
+                            <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-black border-l-4 flex gap-3'>
+                                <img className='w-24' src={langs.img} alt="" />
+                            </div>
+                            <div className='flex flex-col gap-4 justify-center'>
+                                <p className='font-bold text-sm'>{langs.name}</p>
+                                <p className='text-xs'>{langs.discription}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -250,7 +267,7 @@ function NavBar() {
                     <ul >
                         {isLogged ? (
                             <div className='flex gap-8 items-center max-sm:hidden sm:px-16'>
-                                <div className='relative left-[-2rem]'>
+                                <div className='relative'>
                                     <svg width="15" height="19" viewBox="0 0 15 19" fill="white" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.075 12.6562V12.677L13.0896 12.6916L14.95 14.552V15.4187H0.05V14.552L1.91036 12.6916L1.925 12.677V12.6562V7.96875C1.925 5.09878 3.45165 2.72334 6.10532 2.09239L6.14375 2.08326V2.04375V1.40625C6.14375 0.655739 6.74949 0.05 7.5 0.05C8.25051 0.05 8.85625 0.655739 8.85625 1.40625V2.04375V2.08329L8.89472 2.0924C11.5576 2.72333 13.075 5.10801 13.075 7.96875V12.6562ZM11.25 13.6438H11.3V13.5938V7.96875C11.3 6.79644 10.9431 5.72974 10.2886 4.95523C9.63337 4.17991 8.68189 3.7 7.5 3.7C6.31811 3.7 5.36663 4.17991 4.71142 4.95523C4.05689 5.72974 3.7 6.79644 3.7 7.96875V13.5938V13.6438H3.75H11.25ZM9.32432 16.4562C9.29759 17.437 8.48692 18.2313 7.5 18.2313C6.51308 18.2313 5.70241 17.437 5.67568 16.4562H9.32432Z" fill="white" stroke="white" stroke-width="0.1" />
                                     </svg>
