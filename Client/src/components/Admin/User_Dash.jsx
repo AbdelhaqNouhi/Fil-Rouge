@@ -26,6 +26,7 @@ const User_Dash = () => {
     return (
         <div>
             <div className='flex'>
+            <SideBar />
                 <div class="flex flex-col mt-6 w-full p-8">
                     <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 ">
                         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">

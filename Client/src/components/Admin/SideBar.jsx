@@ -1,9 +1,28 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, Navigate } from 'react-router-dom'
 import Profile from '../../assets/images/Profile/Profile.png'
 import logo from '../../assets/images/logo.png'
+import { useState } from 'react'
 
 const SideBar = () => {
+
+  const [isLogged, setIsLogged] = useState(false);
+
+  const sign_out = () => {
+    setIsLogged(false);
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("role");
+    setIsLogged(false);
+    Navigate('/signIn');
+  };
+
+
   return (
     <div className='w-1/4 lg:w-52 md:w-1/ bg-primary px-1 text-white'>
       <div className='flex flex-col gap-6'>
@@ -19,9 +38,12 @@ const SideBar = () => {
       <div className='flex-col flex gap-64 h-screen py-1 text-white'>
         <div className='flex-col flex gap-8 py-16'>
           <NavLink to="/admin/products" className={({ isActive }) => (isActive ? 'text-center bg-sky-600 bg-green text-white py-1.5 px-2 rounded' : 'text-center hover:bg-sky-600  hover:bg-green py-1.5 px-2 rounded')}><button> Travels </button></NavLink>
-          <NavLink to="/admin/Users" className={({ isActive }) => (isActive ? 'text-center bg-sky-600 bg-green text-white py-1.5 px-2 rounded' : 'text-center hover:bg-sky-600   hover:bg-green  py-1.5 px-2 rounded')}><button> Users </button></NavLink>
+          <NavLink to="/admin/users" className={({ isActive }) => (isActive ? 'text-center bg-sky-600 bg-green text-white py-1.5 px-2 rounded' : 'text-center hover:bg-sky-600   hover:bg-green  py-1.5 px-2 rounded')}><button> Users </button></NavLink>
         </div>
         <div className='w-full'>
+          <button onClick={() => logOut()} >
+            Log out
+          </button>
         </div>
       </div>
     </div>

@@ -81,6 +81,7 @@ function DropDownProfile() {
         localStorage.removeItem("email");
         localStorage.removeItem("firstName");
         localStorage.removeItem("lastName");
+        localStorage.removeItem("role");
         setIsLogged(false);
     };
 
