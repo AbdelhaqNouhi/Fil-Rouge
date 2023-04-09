@@ -12,4 +12,6 @@ export class ProductDto {
 
     @IsNotEmpty()
     image: String;
+
+    createdAt: Date;
 }

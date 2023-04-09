@@ -23,10 +23,17 @@ export class ProductController {
     }
 
     @Get('getAll')
-    @Roles(Role.Admin)
+    @Roles(Role.User, Role.Admin)
     @UseGuards(RolesGuard)
     GetAll() {
         return this.productService.GetAll();
+    }
+
+    @Get('getThree')
+    @Roles(Role.User, Role.Admin)
+    @UseGuards(RolesGuard)
+    GetThree() {
+        return this.productService.GetThree();
     }
 
     @Get(':id')

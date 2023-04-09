@@ -10,8 +10,15 @@ export class ProductService {
     constructor(@InjectModel(Product.name) private ProductModule: Model<ProductDocument>) {}
 
     async GetAll() {
-        const ProductData = await this.ProductModule.find().exec();
+        const ProductData = await this.ProductModule.find({
+            order: { createdAt: 'DESC' },
+        }).exec();
         return ProductData;
+    }
+
+    async GetThree() {
+        const products = await this.ProductModule.find().sort({ createdAt: 'desc' }).limit(3);
+        return products;
     }
 
     async GetById(id: number) {

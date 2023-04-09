@@ -3,54 +3,30 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/images/logo.png'
 import CustomButton from './custom/button/CustomButton';
 import Profile from '../assets/images/Profile/Profile.png';
-import english from '../assets/icons/dropDown/english.svg';
-import france from '../assets/icons//dropDown/france.svg';
-import germany from '../assets/icons//dropDown/germany.svg';
-import nederlands from '../assets/icons//dropDown/nederlands.svg';
-import spain from '../assets/icons//dropDown/spain.svg';
+import Product1 from '../assets/images/product/product1.png';
 
 
-function DropDownLang() {
+function DropDownPanier() {
 
     const [openLang, setOpenLang] = useState(false);
-    const [lang, setLang] = useState([
-        {
-            id: 1,
-            img: Profile,
-            name: 'English',
-            discription: 'English',
-        },
-        {
-            id: 2,
-            img: Profile,
-            name: 'France',
-            discription: 'English',
-        },
-        {
-            id: 3,
-            img: Profile,
-            name: 'Germany',
-            discription: 'English',
-        },
-        {
-            id: 4,
-            img: Profile,
-            name: 'Nederlands',
-            discription: 'English',
-        },
-        {
-            id: 4,
-            img: Profile,
-            name: 'Nederlands',
-            discription: 'English',
-        },
-        {
-            id: 4,
-            img: Profile,
-            name: 'Nederlands',
-            discription: 'English',
-        },
-    ]);
+    const [box, setBox] = useState([]);
+    const token = localStorage.getItem("token");
+
+    const getThreeProducts = async () => {
+        await fetch('http://localhost:3000/product/getThree', {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => setBox(data))
+    }
+
+    useEffect(() => {
+        getThreeProducts();
+    }, [])
 
     return (
         <div className=''>
@@ -62,15 +38,17 @@ function DropDownLang() {
                 </button>
             </div>
             {openLang && (
-                <div className='mt-[1.5rem] md:ml-[-14rem] ml-[-19rem] rounded bg-green w-[440px] absolute'>
-                    {lang.map((langs, index) => (
-                        <div className='flex gap-4'>
-                            <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-black border-l-4 flex gap-3'>
-                                <img className='w-24' src={langs.img} alt="" />
-                            </div>
-                            <div className='flex flex-col gap-4 justify-center'>
-                                <p className='font-bold text-sm'>{langs.name}</p>
-                                <p className='text-xs'>{langs.discription}</p>
+                <div className='mt-[1.5rem] md:ml-[-14rem] ml-[-19rem] rounded bg-white w-[440px] absolute'>
+                    {box && box.length > 0 && box.map((boxObj, index) => (
+                        <div className='bg-green border border-spacing-4'>
+                            <div className='flex gap-4'>
+                                <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-green border-l-4 flex gap-3'>
+                                    <img className='w-20' src={Product1} alt="" />
+                                </div>
+                                <div className='flex flex-col gap-4 justify-center'>
+                                    <p className='font-bold text-sm'>{boxObj.name}</p>
+                                    <p className='text-xs'>{boxObj.price} DH</p>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -195,7 +173,7 @@ function NavBar() {
                                         <path d="M13.075 12.6562V12.677L13.0896 12.6916L14.95 14.552V15.4187H0.05V14.552L1.91036 12.6916L1.925 12.677V12.6562V7.96875C1.925 5.09878 3.45165 2.72334 6.10532 2.09239L6.14375 2.08326V2.04375V1.40625C6.14375 0.655739 6.74949 0.05 7.5 0.05C8.25051 0.05 8.85625 0.655739 8.85625 1.40625V2.04375V2.08329L8.89472 2.0924C11.5576 2.72333 13.075 5.10801 13.075 7.96875V12.6562ZM11.25 13.6438H11.3V13.5938V7.96875C11.3 6.79644 10.9431 5.72974 10.2886 4.95523C9.63337 4.17991 8.68189 3.7 7.5 3.7C6.31811 3.7 5.36663 4.17991 4.71142 4.95523C4.05689 5.72974 3.7 6.79644 3.7 7.96875V13.5938V13.6438H3.75H11.25ZM9.32432 16.4562C9.29759 17.437 8.48692 18.2313 7.5 18.2313C6.51308 18.2313 5.70241 17.437 5.67568 16.4562H9.32432Z" fill="white" stroke="white" stroke-width="0.1" />
                                     </svg>
                                 </div>
-                                <DropDownLang />
+                                <DropDownPanier />
                                 <div className='flex items-center left-[0rem]'>
                                     <DropDownProfile />
                                 </div>
@@ -272,7 +250,7 @@ function NavBar() {
                                         <path d="M13.075 12.6562V12.677L13.0896 12.6916L14.95 14.552V15.4187H0.05V14.552L1.91036 12.6916L1.925 12.677V12.6562V7.96875C1.925 5.09878 3.45165 2.72334 6.10532 2.09239L6.14375 2.08326V2.04375V1.40625C6.14375 0.655739 6.74949 0.05 7.5 0.05C8.25051 0.05 8.85625 0.655739 8.85625 1.40625V2.04375V2.08329L8.89472 2.0924C11.5576 2.72333 13.075 5.10801 13.075 7.96875V12.6562ZM11.25 13.6438H11.3V13.5938V7.96875C11.3 6.79644 10.9431 5.72974 10.2886 4.95523C9.63337 4.17991 8.68189 3.7 7.5 3.7C6.31811 3.7 5.36663 4.17991 4.71142 4.95523C4.05689 5.72974 3.7 6.79644 3.7 7.96875V13.5938V13.6438H3.75H11.25ZM9.32432 16.4562C9.29759 17.437 8.48692 18.2313 7.5 18.2313C6.51308 18.2313 5.70241 17.437 5.67568 16.4562H9.32432Z" fill="white" stroke="white" stroke-width="0.1" />
                                     </svg>
                                 </div>
-                                <DropDownLang />
+                                <DropDownPanier />
                                 <div className='flex items-center relative left-[0rem]'>
                                     <DropDownProfile firstName={firstName} lastName={lastName} email={email}/>
                                     <div className='flex flex-col justify-center  text-xs text-white relative left-[2.4rem]'>
