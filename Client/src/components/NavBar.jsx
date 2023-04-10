@@ -70,7 +70,7 @@ function DropDownPanier() {
                     {box && box.length > 0 && box.map((boxObj, index) => (
                         <div className='border-b border-spacing-4 shadow-lg text-black flex justify-between pr-8'>
                             <div className='flex gap-4'>
-                                <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-green border-l-4 flex gap-3'>
+                                <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-green border-l-4 border-white flex gap-3'>
                                     <img className='w-20' src={Product1} alt="" />
                                 </div>
                                 <div className='flex flex-col gap-4 justify-center'>
@@ -114,7 +114,7 @@ function DropDownProfile() {
             <div>
                 <button
                     onClick={() => setOpenProfile((event) => !event)}                >
-                    <img className='w-8 h-8 rounded-full' src={Profile} alt="" />
+                    <img className='w-7 h-7 rounded-full border-2 bottom-white' src={Profile} alt="" />
                 </button>
             </div>
             {openProfile && (
@@ -282,7 +282,7 @@ function NavBar() {
                                 <DropDownPanier />
                                 <div className='flex items-center relative left-[0rem]'>
                                     <DropDownProfile firstName={firstName} lastName={lastName} email={email}/>
-                                    <div className='flex flex-col justify-center  text-xs text-white relative left-[2.4rem]'>
+                                    <div className='flex flex-col items-center text-xs text-white relative bottom-[0.2rem] left-[2.4rem]'>
                                         <p className='font-bold'>{firstName}</p>
                                         <p>{lastName}</p>
                                     </div>
