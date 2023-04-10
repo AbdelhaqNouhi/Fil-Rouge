@@ -9,7 +9,6 @@ import { Roles } from 'src/auth/roles.decorator';
 
 
 @Controller('product')
-@UseGuards(JwtAuthGuard)
 @UsePipes(new ValidateProductPipe())
 
 export class ProductController {
@@ -18,20 +17,21 @@ export class ProductController {
     @Post('create')
     @Roles(Role.Admin)
     @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard)
     Create(@Body() productData: ProductDto) {
         return this.productService.Create(productData);
     }
 
     @Get('getAll')
-    @Roles(Role.User, Role.Admin)
-    @UseGuards(RolesGuard)
+    // @Roles(Role.User, Role.Admin)
+    // @UseGuards(RolesGuard)
     GetAll() {
         return this.productService.GetAll();
     }
 
     @Get('getThree')
-    @Roles(Role.User, Role.Admin)
-    @UseGuards(RolesGuard)
+    // @Roles(Role.User, Role.Admin)
+    // @UseGuards(RolesGuard)
     GetThree() {
         return this.productService.GetThree();
     }
@@ -47,6 +47,7 @@ export class ProductController {
     @Post(':id')
     @Roles(Role.Admin)
     @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard)
     Update(@Param('id') id: any, @Body() productData: ProductDto) {
         return this.productService.Update(id, productData);
     }
@@ -54,6 +55,7 @@ export class ProductController {
     @Delete(':id')
     @Roles(Role.Admin)
     @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard)
     Delete(@Param('id') id: any) {
         return this.productService.Delete(id);
     }
