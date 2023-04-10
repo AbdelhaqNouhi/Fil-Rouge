@@ -4,7 +4,35 @@ import logo from '../assets/images/logo.png'
 import CustomButton from './custom/button/CustomButton';
 import Profile from '../assets/images/Profile/Profile.png';
 import Product1 from '../assets/images/product/product1.png';
+import plus from '../assets//icons/count/plus.png'
+import minus from '../assets//icons//count/minus.png'
 
+function Counter({ text }) {
+
+    const [count, setCount] = useState(0);
+
+    const handleIncrement = () => {
+        setCount(count + 1);
+    };
+
+    const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    };
+
+    return (
+        <div className='flex justify-end items-center'>
+            <button onClick={handleDecrement} className=''>
+                <img className='w-[30px] h-[30px]' src={minus} alt="" />
+            </button>
+            <span className='text-sm border-2 border-primary text-primary font-semibold px-4 rounded'>{count}{text}</span>
+            <button onClick={handleIncrement} className=''>
+                <img src={plus} alt="" />
+            </button>
+        </div>
+    );
+}
 
 function DropDownPanier() {
 
@@ -38,9 +66,9 @@ function DropDownPanier() {
                 </button>
             </div>
             {openLang && (
-                <div className='mt-[1.5rem] md:ml-[-14rem] ml-[-19rem] rounded bg-white w-[440px] absolute'>
+                <div className='mt-[1.5rem] md:ml-[-14rem] ml-[-19rem] rounded shadow-md shadow-primary bg-white w-[440px] absolute'>
                     {box && box.length > 0 && box.map((boxObj, index) => (
-                        <div className='bg-green border border-spacing-4'>
+                        <div className='border-b border-spacing-4 shadow-lg text-black flex justify-between pr-8'>
                             <div className='flex gap-4'>
                                 <div className=' text-sm py-2 px-2 cursor-pointer rounded hover:border-l-green border-l-4 flex gap-3'>
                                     <img className='w-20' src={Product1} alt="" />
@@ -50,6 +78,7 @@ function DropDownPanier() {
                                     <p className='text-xs'>{boxObj.price} DH</p>
                                 </div>
                             </div>
+                            <Counter />
                         </div>
                     ))}
                 </div>
