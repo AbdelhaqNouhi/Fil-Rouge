@@ -3,6 +3,7 @@ import AddProductForm from './Button/AddProductForm';
 import CustomButton from '../custom/button/CustomButton';
 import { Link } from 'react-router-dom';
 import SideBar from './SideBar';
+import Product1 from '../../assets/images/product/product1.png'
 
 const Product_Dash = () => {
     //  state of modal
@@ -180,14 +181,6 @@ const Product_Dash = () => {
                             </div>
                             <div className="flex flex-col gap-2 w-64">
                                 <label>Image</label>
-                                <input
-                                    type="text"
-                                    name="image"
-                                    placeholder="Image"
-                                    className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
-                                    value={image}
-                                    onChange={(e) => setImage(e.target.value)}
-                                />
                                 <label className='max-md:w-full p-2 rounded bg-green text-white outline-none text-center' htmlFor="image">Choose an image</label>
                                 <input className='hidden' type="file" id="image" name="image" value={image} onChange={(e) => setImage(e.target.value)} />
                             </div>
@@ -237,14 +230,8 @@ const Product_Dash = () => {
                             </div>
                             <div className="flex flex-col gap-2 w-64">
                                 <label>Image</label>
-                                <input
-                                    type="text"
-                                    name="image"
-                                    placeholder="Image"
-                                    className="max-md:w-full p-2 border-b bg-secondary bg-opacity-0 rounded outline-none"
-                                    value={formData.image}
-                                    onChange={handleChange}
-                                />
+                                <label className='max-md:w-full p-2 rounded bg-green text-white outline-none text-center' htmlFor="image">Choose an image</label>
+                                <input className='hidden' type="file" id="image" name="image" value={image} onChange={(e) => setImage(e.target.value)} />
                             </div>
                         </div>
                         <CustomButton text={'Update Product'} />
@@ -306,7 +293,7 @@ const Product_Dash = () => {
                                             {boxObj.price}
                                         </td>
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap">
-                                            {boxObj.image}
+                                            <img className='w-8' src={Product1} alt="" />
                                         </td>
                                         <td class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap">
                                             <div class="flex justify-around">

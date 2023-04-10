@@ -7,7 +7,9 @@ import { useState } from 'react'
 const SideBar = () => {
 
   const [isLogged, setIsLogged] = useState(false);
-
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
+  const role = localStorage.getItem("role");
   const sign_out = () => {
     setIsLogged(false);
   };
@@ -30,8 +32,8 @@ const SideBar = () => {
         <div className='flex  items-center justify-evenly'>
           <img src={Profile} className='object-cover inset-0 h-11 w-11 rounded-full' />
           <div className='text-sm'>
-            <h1>Abdelhaq Nouhi</h1>
-            <p>admin</p>
+            <h1>{firstName} {lastName}</h1>
+            <p>{role}</p>
           </div>
         </div>
       </div>
@@ -41,9 +43,9 @@ const SideBar = () => {
           <NavLink to="/admin/users" className={({ isActive }) => (isActive ? 'text-center bg-sky-600 bg-green text-white py-1.5 px-2 rounded' : 'text-center hover:bg-sky-600   hover:bg-green  py-1.5 px-2 rounded')}><button> Users </button></NavLink>
         </div>
         <div className='w-full'>
-          <button onClick={() => logOut()} >
+          {/* <button onClick={() => logOut()} >
             Log out
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
